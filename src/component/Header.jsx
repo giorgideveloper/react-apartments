@@ -29,6 +29,11 @@ function Header() {
 								</Link>
 							</li>
 						</ul>
+						<li className='nav-item'>
+							<Link className=' btn btn-success' to='addPost'>
+								Add apartment
+							</Link>
+						</li>
 					</div>
 				</div>
 			</nav>
