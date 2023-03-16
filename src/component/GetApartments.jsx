@@ -38,7 +38,7 @@ function GetApartments() {
 									<p className='card-text'>{apartment.short_description}</p>
 									<p className='card-text fs-6'>{apartment.address}</p>
 
-									<Link to={`/apartment-list/${apartment.id}`}>
+									<Link to={`api/apartment-list/${apartment.id}`}>
 										<button>Go somewhere</button>
 									</Link>
 								</div>
