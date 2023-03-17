@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-	baseURL: 'http://f90a-5-152-82-202.ngrok.io/api/',
+	baseURL: 'https://api.geoevents.ge/api/',
 	withCredentials: false,
 	headers: {
 		Accept: 'application/json',
@@ -15,5 +15,8 @@ export default {
 	},
 	getApartment(id) {
 		return api.get(`apartment-list/${id}`);
+	},
+	addApartment(str) {
+		return api.post('apartment-create/', { title: str });
 	},
 };
