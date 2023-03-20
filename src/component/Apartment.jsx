@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
+
 function Apartment() {
 	const [MainInputRef, setMainInputRef] = useState('');
 	const [MainTypeInputRef, setMainTypeInputRef] = useState('');
@@ -23,29 +24,49 @@ function Apartment() {
 	const currencyType = useRef('');
 	const priceRef = useRef('');
 
-	const postData = e => {
+	console.log(ceilingHeight.current.value);
+	const post = {
+		user: 3,
+		main_category_type: MainInputRef, //
+		building_status_type: MainTypeInputRef, //
+		ceiling_height: ceilingHeight.current.value,
+		city: cityRef.current.value,
+		address: addressRef.current.value,
+		area: areaRef.current.value,
+		numbers_of_floors: numberOfFloorsRef.current.value,
+		apartment_floor: apartmentFloorRef.current.value,
+		bedrooms: bedrooms.current.value,
+		bathroom: bathroom.current.value,
+		Parking_type: parkingRef.current.value,
+		hot_water_type: hotWater.current.value,
+		title: apartmentTitle.current.value, //
+		description: description.current.value,
+		image1: imageRef.current.value,
+		Currency_type: currencyType.current.value,
+		price: priceRef.current.value,
+	};
+	const token = '2649637d51088234890f12de0146dad3c47d1426';
+
+	const config = {
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+			user: 2,
+		},
+	};
+
+	const postData = () => {
 		axios
-			.post(`https://api.geoevents.ge/api/apartment-create`, {
-				main_category_type: MainInputRef,
-				building_status_type: MainTypeInputRef,
-				ceiling_height: ceilingHeight.current.value,
-				city: cityRef.current.value,
-				address: addressRef.current.value,
-				area: areaRef.current.value,
-				numbers_of_floors: numberOfFloorsRef.current.value,
-				apartment_floor: apartmentFloorRef.current.value,
-				bedrooms: bedrooms.current.value,
-				bathroom: bathroom.current.value,
-				Parking_type: parkingRef.current.value,
-				hot_water_type: hotWater.current.value,
-				title: apartmentTitle.current.value,
-				description: description.current.value,
-				image1: imageRef.current.value,
-				Currency_type: currencyType.current.value,
-				price: priceRef.current.value,
-			})
+			.post(
+				`http://200c-5-152-82-202.ngrok.io/api/house-create/`,
+				{
+					title: 'hello2',
+					description: 'apartment2',
+				},
+				config
+			)
 			.then(res => {
-				console.log('success');
+				console.log(res);
 			})
 			.catch(err => console.log(err));
 	};

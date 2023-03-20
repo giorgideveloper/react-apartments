@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Apartment from './Apartment';
+import HomeList from './HomeList';
 
 function AddPost() {
 	const [selects, setSelects] = useState();
@@ -35,7 +36,7 @@ function AddPost() {
 				<div className='row'>
 					<div className='content'>
 						{(selects === 'apartment' && <Apartment />) ||
-							(selects === 'home' && <h2>სახლი და აგარაკი</h2>) ||
+							(selects === 'home' && <HomeList />) ||
 							(selects === 'space' && <h2>კომერციული ფართი</h2>) ||
 							(selects === 'land' && <h2>მიწის ნაკვეთი</h2>) ||
 							(selects === 'hotel' && <h2>სასტუმრო</h2>)}
