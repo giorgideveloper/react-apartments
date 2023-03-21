@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import Parameters from './Parameters';
 
 function HomeList() {
 	const [post, setPost] = useState({
 		main_category_type: '',
 		building_status_type: '',
 	});
+
 	const handleInput = event => {
 		setPost({ ...post, [event.target.name]: event.target.value });
 	};
@@ -51,7 +53,7 @@ function HomeList() {
 							<input
 								className='form-check-input'
 								type='radio'
-								name='main_category_type'
+								name='main_category_typee'
 								id='inlineRadio3'
 								value='1'
 								onChange={handleInput}
@@ -64,7 +66,7 @@ function HomeList() {
 							<input
 								className='form-check-input '
 								type='radio'
-								name='main_category_type'
+								name='main_category_typee'
 								id='inlineRadio4'
 								value='2'
 								onChange={handleInput}
@@ -77,7 +79,7 @@ function HomeList() {
 							<input
 								className='form-check-input '
 								type='radio'
-								name='main_category_type'
+								name='main_category_typee'
 								id='inlineRadio5'
 								value='2'
 								onChange={handleInput}
@@ -90,7 +92,7 @@ function HomeList() {
 							<input
 								className='form-check-input '
 								type='radio'
-								name='main_category_type'
+								name='main_category_typee'
 								id='inlineRadio6'
 								value='2'
 								onChange={handleInput}
@@ -116,6 +118,7 @@ function HomeList() {
 						</select>
 					</div>
 				</div>
+				<Parameters setParameters={setPost} />
 			</div>
 		</>
 	);
