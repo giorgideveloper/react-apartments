@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Parameters from './Parameters';
+import ParametersList from './ParametersList';
 
 function HomeList() {
 	const [post, setPost] = useState({
@@ -53,7 +53,7 @@ function HomeList() {
 							<input
 								className='form-check-input'
 								type='radio'
-								name='main_category_typee'
+								name='main_category_type'
 								id='inlineRadio3'
 								value='1'
 								onChange={handleInput}
@@ -66,7 +66,7 @@ function HomeList() {
 							<input
 								className='form-check-input '
 								type='radio'
-								name='main_category_typee'
+								name='main_category_type'
 								id='inlineRadio4'
 								value='2'
 								onChange={handleInput}
@@ -79,7 +79,7 @@ function HomeList() {
 							<input
 								className='form-check-input '
 								type='radio'
-								name='main_category_typee'
+								name='main_category_type'
 								id='inlineRadio5'
 								value='2'
 								onChange={handleInput}
@@ -92,7 +92,7 @@ function HomeList() {
 							<input
 								className='form-check-input '
 								type='radio'
-								name='main_category_typee'
+								name='main_category_type'
 								id='inlineRadio6'
 								value='2'
 								onChange={handleInput}
@@ -111,14 +111,14 @@ function HomeList() {
 							onChange={handleInput}
 							name='building_status_type'
 						>
-							<option selected>Open this select menu</option>
+							<option>Open this select menu</option>
 							<option value='1'>1</option>
 							<option value='2'>2</option>
 							<option value='3'>3</option>
 						</select>
 					</div>
 				</div>
-				<Parameters setParameters={setPost} />
+				<ParametersList allParameters={handleInput} />
 			</div>
 		</>
 	);

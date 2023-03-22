@@ -21,9 +21,7 @@ function AddPost() {
 								value={selects}
 								onChange={e => setSelects(e.target.value)}
 							>
-								<option selected value=''>
-									არჩევა
-								</option>
+								<option value=''>არჩევა</option>
 								<option value='apartment'>კორპუსი ბინა</option>
 								<option value='home'>სახლი და აგარაკი</option>
 								<option value='space'>კომერციული ფართი</option>

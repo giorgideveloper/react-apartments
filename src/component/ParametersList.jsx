@@ -1,13 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function Parameters(setPost) {
-	const [parameters, setParameters] = useState({
-		main_category_type: '',
-		building_status_type: '',
-	});
-	const handleInput = event => {
-		setPost({ ...parameters, [event.target.name]: event.target.value });
-	};
+function ParametersList({ allParameters }) {
 	return (
 		<>
 			{' '}
@@ -24,11 +17,12 @@ function Parameters(setPost) {
 							aria-label='Sizing example input'
 							aria-describedby='inputGroup-sizing-default'
 							placeholder='ფართი'
-							onChange={handleInput}
+							name='room'
+							onChange={allParameters}
 						/>
 					</div>
-					<div class='input-group mb-3'>
-						<span class='input-group-text'>სართული</span>
+					<div className='input-group mb-3'>
+						<span className='input-group-text'>სართული</span>
 						<input
 							type='text'
 							aria-label='First name'
@@ -47,9 +41,7 @@ function Parameters(setPost) {
 							ოთახები
 						</label>
 						<select className='form-select' id='inputGroupSelect01'>
-							<option selected value=''>
-								არჩევა რაოდ
-							</option>
+							<option value=''>არჩევა რაოდ</option>
 							<option value='1'>1</option>
 							<option value='2'>2</option>
 							<option value='3'>3</option>
@@ -62,9 +54,7 @@ function Parameters(setPost) {
 							საძინებელი
 						</label>
 						<select className='form-select' id='inputGroupSelect02'>
-							<option selected value=''>
-								არჩევა რაოდ
-							</option>
+							<option value=''>არჩევა რაოდ</option>
 							<option value='1'>1</option>
 							<option value='2'>2</option>
 							<option value='3'>3</option>
@@ -77,9 +67,7 @@ function Parameters(setPost) {
 							სველი წერტილი
 						</label>
 						<select className='form-select' id='inputGroupSelect03'>
-							<option selected value=''>
-								არჩევა რაოდ
-							</option>
+							<option value=''>არჩევა რაოდ</option>
 							<option value='1'>1</option>
 							<option value='2'>2</option>
 							<option value='3'>3</option>
@@ -92,9 +80,7 @@ function Parameters(setPost) {
 							პარკინგი
 						</label>
 						<select className='form-select' id='inputGroupSelect04'>
-							<option selected value=''>
-								აირჩიე
-							</option>
+							<option value=''>აირჩიე</option>
 							<option value='1'>ეზოს პარკინგი</option>
 							<option value='2'>ავტოფარეხი</option>
 							<option value='3'>პარკინგის ადგილი</option>
@@ -107,9 +93,7 @@ function Parameters(setPost) {
 							აუზი
 						</label>
 						<select className='form-select' id='inputGroupSelect04'>
-							<option selected value=''>
-								აირჩიე
-							</option>
+							<option value=''>აირჩიე</option>
 							<option value='1'>ღია</option>
 							<option value='2'>დახურული</option>
 						</select>
@@ -119,9 +103,7 @@ function Parameters(setPost) {
 							ცხელი წყალი
 						</label>
 						<select className='form-select' id='inputGroupSelect05'>
-							<option selected value=''>
-								აირჩიე
-							</option>
+							<option value=''>აირჩიე</option>
 							<option value='1'>გაზის გამაცხელებელი</option>
 							<option value='2'>ავზი</option>
 							<option value='3'>დენის გამაცხელებელი</option>
@@ -135,9 +117,7 @@ function Parameters(setPost) {
 							გათბობა
 						</label>
 						<select className='form-select' id='inputGroupSelect05'>
-							<option selected value=''>
-								აირჩიე
-							</option>
+							<option value=''>აირჩიე</option>
 							<option value='1'>ცენტრალური გათბობა</option>
 							<option value='2'>გაზის გამათბობელი</option>
 							<option value='3'>დენის გამათბობელი</option>
@@ -163,25 +143,23 @@ function Parameters(setPost) {
 							id='floatingTextarea2'
 							style={{ height: '100px' }}
 						></textarea>
-						<label for='floatingTextarea2'>აღწერა</label>
+						<label htmlFor='floatingTextarea2'>აღწერა</label>
 					</div>
 					<div className='mb-3'>
 						<input
 							type='file'
-							class='form-control'
+							className='form-control'
 							aria-label='file example'
 							required
 						/>
-						<div class='invalid-feedback'>
+						<div className='invalid-feedback'>
 							Example invalid form file feedback
 						</div>
 					</div>
 					<div className='input-group mb-3'>
 						<span className='input-group-text'>ფასი</span>
 						<select className='form-select' id='inputGroupSelect05'>
-							<option selected value=''>
-								აირჩიე
-							</option>
+							<option value=''>აირჩიე</option>
 							<option value='1'>დოლარი</option>
 							<option value='2'>ლარი</option>
 						</select>
@@ -199,4 +177,4 @@ function Parameters(setPost) {
 	);
 }
 
-export default Parameters;
+export default ParametersList;
