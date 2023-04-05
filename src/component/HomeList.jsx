@@ -5,13 +5,40 @@ function HomeList() {
 	const [post, setPost] = useState({
 		main_category_type: '',
 		building_status_type: '',
+		collateral_type: '',
+		collateral_period: '',
+		collateral_agreement_type: '',
+		rental_type: '',
+		title: '',
+		image1: '',
+		image2: '',
+		image3: '',
+		youtube: '',
+		short_description: '',
+		description: '',
+		mobile: '',
+		city: '',
+		address: '',
+		Currency_type: '',
+		price: null,
+		area: null,
+		ceiling_height: null,
+		bedrooms: null,
+		bathroom: null,
+		numbers_of_floors: null,
+		apartment_floor: null,
+		max_guests: null,
+		hot_water_type: '',
+		Parking_type: '',
+		favorites: false,
+		created_at: '2023-04-05T02:19:33.461300+04:00',
+		updated_at: '2023-04-05T02:19:33.461367+04:00',
 	});
 
 	const handleInput = event => {
 		setPost({ ...post, [event.target.name]: event.target.value });
 	};
 
-	console.log(post);
 	return (
 		<>
 			<div className='container'>
@@ -111,7 +138,7 @@ function HomeList() {
 							onChange={handleInput}
 							name='building_status_type'
 						>
-							<option>Open this select menu</option>
+							<option>Open tsat menu</option>
 							<option value='1'>1</option>
 							<option value='2'>2</option>
 							<option value='3'>3</option>

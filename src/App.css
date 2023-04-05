@@ -1,0 +1,30 @@
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  color: #333333;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-top: none;
+  display: none;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.dropdown-menu.show {
+  display: block;
+}

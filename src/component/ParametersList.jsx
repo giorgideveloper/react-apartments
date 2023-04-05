@@ -1,6 +1,20 @@
 import React from 'react';
 
-function ParametersList({ allParameters }) {
+function ParametersList({
+	allParameters,
+	mobileRef,
+	currentRef,
+	priceRef,
+	areaRef,
+	celilingRef,
+	bedroomsRef,
+	bathroomRef,
+	numbersRef,
+	aparatmentRef,
+	maxGuestsRef,
+	setCurrent,
+	submit,
+}) {
 	return (
 		<>
 			{' '}
@@ -17,7 +31,7 @@ function ParametersList({ allParameters }) {
 							aria-label='Sizing example input'
 							aria-describedby='inputGroup-sizing-default'
 							placeholder='ფართი'
-							name='room'
+							name='area'
 							onChange={allParameters}
 						/>
 					</div>
@@ -28,19 +42,27 @@ function ParametersList({ allParameters }) {
 							aria-label='First name'
 							className='form-control'
 							placeholder='სართული სულ'
+							name='apartment_floor'
+							onChange={allParameters}
 						/>
 						<input
 							type='text'
 							aria-label='Last name'
 							className='form-control'
 							placeholder='სართული'
+							name='apartment_floor'
+							onChange={allParameters}
 						/>
 					</div>
 					<div className='input-group mb-3'>
 						<label className='input-group-text' htmlFor='inputGroupSelect01'>
 							ოთახები
 						</label>
-						<select className='form-select' id='inputGroupSelect01'>
+						<select
+							className='form-select'
+							id='inputGroupSelect01'
+							onChange={allParameters}
+						>
 							<option value=''>არჩევა რაოდ</option>
 							<option value='1'>1</option>
 							<option value='2'>2</option>
@@ -53,7 +75,12 @@ function ParametersList({ allParameters }) {
 						<label className='input-group-text' htmlFor='inputGroupSelect02'>
 							საძინებელი
 						</label>
-						<select className='form-select' id='inputGroupSelect02'>
+						<select
+							className='form-select'
+							id='inputGroupSelect02'
+							ref={bedroomsRef}
+							onChange={allParameters}
+						>
 							<option value=''>არჩევა რაოდ</option>
 							<option value='1'>1</option>
 							<option value='2'>2</option>
@@ -79,7 +106,12 @@ function ParametersList({ allParameters }) {
 						<label className='input-group-text' htmlFor='inputGroupSelect04'>
 							პარკინგი
 						</label>
-						<select className='form-select' id='inputGroupSelect04'>
+						<select
+							className='form-select'
+							id='inputGroupSelect04'
+							name='Parking_type'
+							onChange={allParameters}
+						>
 							<option value=''>აირჩიე</option>
 							<option value='1'>ეზოს პარკინგი</option>
 							<option value='2'>ავტოფარეხი</option>
@@ -102,7 +134,12 @@ function ParametersList({ allParameters }) {
 						<label className='input-group-text' htmlFor='inputGroupSelect05'>
 							ცხელი წყალი
 						</label>
-						<select className='form-select' id='inputGroupSelect05'>
+						<select
+							className='form-select'
+							id='inputGroupSelect05'
+							name='hot_water_type'
+							onChange={allParameters}
+						>
 							<option value=''>აირჩიე</option>
 							<option value='1'>გაზის გამაცხელებელი</option>
 							<option value='2'>ავზი</option>
@@ -134,6 +171,8 @@ function ParametersList({ allParameters }) {
 							aria-label='Sizing example input'
 							aria-describedby='inputGroup-sizing-default'
 							placeholder='სათაური'
+							name='title'
+							onChange={allParameters}
 						/>
 					</div>
 					<div className='form-floating mb-3'>
@@ -142,6 +181,8 @@ function ParametersList({ allParameters }) {
 							placeholder='Leave a comment here'
 							id='floatingTextarea2'
 							style={{ height: '100px' }}
+							ref={areaRef}
+							onChange={allParameters}
 						></textarea>
 						<label htmlFor='floatingTextarea2'>აღწერა</label>
 					</div>
@@ -150,7 +191,7 @@ function ParametersList({ allParameters }) {
 							type='file'
 							className='form-control'
 							aria-label='file example'
-							required
+							// required
 						/>
 						<div className='invalid-feedback'>
 							Example invalid form file feedback
@@ -158,7 +199,12 @@ function ParametersList({ allParameters }) {
 					</div>
 					<div className='input-group mb-3'>
 						<span className='input-group-text'>ფასი</span>
-						<select className='form-select' id='inputGroupSelect05'>
+						<select
+							className='form-select'
+							id='inputGroupSelect05'
+							ref={currentRef}
+							onChange={allParameters}
+						>
 							<option value=''>აირჩიე</option>
 							<option value='1'>დოლარი</option>
 							<option value='2'>ლარი</option>
@@ -168,9 +214,14 @@ function ParametersList({ allParameters }) {
 							aria-label='Last name'
 							className='form-control'
 							placeholder='სრული ფასი '
+							ref={priceRef}
+							onChange={allParameters}
 						/>
 					</div>
-					<button className='btn bg-success mb-5'> გამოქვეყნება</button>
+					<button className='btn bg-success mb-5' onClick={() => submit()}>
+						{' '}
+						გამოქვეყნება
+					</button>
 				</div>
 			</div>
 		</>
