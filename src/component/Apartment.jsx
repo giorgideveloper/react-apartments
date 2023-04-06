@@ -11,29 +11,25 @@ function Apartment() {
 	const bedroomsRef = useRef(null);
 	const bathroomRef = useRef(null);
 	const numbersRef = useRef(null);
-	const aparatmentRef = useRef(null);
+	const apartmentFloorRef = useRef(null);
+	const maxApartmentRef = useRef(null);
 	const maxGuestsRef = useRef(null);
 
-	const [current, setCurrent] = useState('');
-
 	const [post, setPost] = useState({
-		main_category_type: '',
-		building_status_type: '',
+		main_category_type: '4',
+		building_status_type: '2',
 		collateral_type: '',
 		collateral_period: '',
 		collateral_agreement_type: '',
 		rental_type: '',
-		title: '',
-		image1: '',
-		image2: '',
-		image3: '',
+		title: 'ბინა ბათუმში',
 		youtube: '',
 		short_description: '',
 		description: '',
 		mobile: null,
 		city: '',
 		address: '',
-		Currency_type: null,
+		Currency_type: '1',
 		price: null,
 		area: null,
 		ceiling_height: null,
@@ -45,23 +41,23 @@ function Apartment() {
 		hot_water_type: '',
 		Parking_type: '',
 		favorites: false,
-		created_at: '2023-04-05T15:55:07.583455+04:00',
-		updated_at: '2023-04-05T15:55:07.583455+04:00',
+		user: 1,
 	});
 
 	console.log(post);
 	const handleInput = event => {
 		setPost({
 			...post,
-			Currency_type: parseFloat(currentRef.current.value),
 			price: parseFloat(priceRef.current.value),
 			area: parseFloat(areaRef.current.value),
 			ceiling_height: parseFloat(ceilingRef.current.value),
 			bedrooms: parseFloat(bedroomsRef.current.value),
 			bathroom: parseFloat(bathroomRef.current.value),
-
+			apartment_floor: parseFloat(apartmentFloorRef.current.value),
+			numbers_of_floors: parseFloat(maxApartmentRef.current.value),
 			[event.target.name]: event.target.value,
 		});
+
 		/* 	setCurrent({
 			...post,
 			Currency_type: parseFloat(currentRef.current.value),
@@ -238,13 +234,12 @@ function Apartment() {
 						currentRef={currentRef}
 						priceRef={priceRef}
 						areaRef={areaRef}
-						ceilingRef={ceilingRef}
 						bedroomsRef={bedroomsRef}
 						bathroomRef={bathroomRef}
 						numbersRef={numbersRef}
-						aparatmentRef={aparatmentRef}
+						apartmentFloorRef={apartmentFloorRef}
+						maxApartmentRef={maxApartmentRef}
 						maxGuestsRef={maxGuestsRef}
-						setCurrent={setCurrent}
 						submit={postData}
 					/>
 				</div>

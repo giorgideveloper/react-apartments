@@ -35,7 +35,10 @@ function PostPage() {
 							<div className='card-body'>
 								<h6 className='card-title'>{post.title}</h6>
 								<p className='card-text'>{post.short_description}</p>
+								<p className='card-text fs-6'>{post.price}</p>
+								<p className='card-text fs-6'>{post.city}</p>
 								<p className='card-text fs-6'>{post.address}</p>
+								<p className='card-text fs-6'></p>
 							</div>
 						</div>
 					</div>

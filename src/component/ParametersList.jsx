@@ -6,13 +6,12 @@ function ParametersList({
 	currentRef,
 	priceRef,
 	areaRef,
-	celilingRef,
 	bedroomsRef,
 	bathroomRef,
 	numbersRef,
-	aparatmentRef,
+	apartmentFloorRef,
+	maxApartmentRef,
 	maxGuestsRef,
-	setCurrent,
 	submit,
 }) {
 	return (
@@ -42,7 +41,7 @@ function ParametersList({
 							aria-label='First name'
 							className='form-control'
 							placeholder='სართული სულ'
-							name='apartment_floor'
+							ref={maxApartmentRef}
 							onChange={allParameters}
 						/>
 						<input
@@ -50,7 +49,7 @@ function ParametersList({
 							aria-label='Last name'
 							className='form-control'
 							placeholder='სართული'
-							name='apartment_floor'
+							ref={apartmentFloorRef}
 							onChange={allParameters}
 						/>
 					</div>
@@ -93,7 +92,12 @@ function ParametersList({
 						<label className='input-group-text' htmlFor='inputGroupSelect03'>
 							სველი წერტილი
 						</label>
-						<select className='form-select' id='inputGroupSelect03'>
+						<select
+							className='form-select'
+							id='inputGroupSelect03'
+							ref={bathroomRef}
+							onChange={allParameters}
+						>
 							<option value=''>არჩევა რაოდ</option>
 							<option value='1'>1</option>
 							<option value='2'>2</option>
@@ -202,7 +206,7 @@ function ParametersList({
 						<select
 							className='form-select'
 							id='inputGroupSelect05'
-							ref={currentRef}
+							name='Currency_type'
 							onChange={allParameters}
 						>
 							<option value=''>აირჩიე</option>
