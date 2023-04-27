@@ -1,8 +1,28 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import ParametersList from './ParametersList';
+import cityData from './cityData/cityData.json';
 
 function Apartment() {
+	//checkbox
+	const [airConditioner, setAirConditioner] = useState(false);
+	const [checked, setChecked] = useState([
+		{
+			name: 'user1',
+			checked: false,
+		},
+		{
+			name: 'user2',
+			checked: false,
+		},
+		{
+			name: 'user3',
+			checked: false,
+		},
+	]);
+
+	console.log(checked);
+	//  int ref
 	const mobileRef = useRef(null);
 	const currentRef = useRef(null);
 	const priceRef = useRef(null);
@@ -33,10 +53,13 @@ function Apartment() {
 		price: null,
 		area: null,
 		ceiling_height: null,
+		rooms: '',
 		bedrooms: null,
 		bathroom: null,
 		numbers_of_floors: null,
 		apartment_floor: null,
+		air_conditioner: false,
+		Parking_type: '',
 		max_guests: null,
 		hot_water_type: '',
 		Parking_type: '',
@@ -45,6 +68,7 @@ function Apartment() {
 	});
 
 	console.log(post);
+
 	const handleInput = event => {
 		setPost({
 			...post,
@@ -55,6 +79,7 @@ function Apartment() {
 			bathroom: parseFloat(bathroomRef.current.value),
 			apartment_floor: parseFloat(apartmentFloorRef.current.value),
 			numbers_of_floors: parseFloat(maxApartmentRef.current.value),
+			max_guests: parseFloat(maxGuestsRef.current.value),
 			[event.target.name]: event.target.value,
 		});
 
@@ -190,30 +215,39 @@ function Apartment() {
 									className='input-group-text'
 									id='inputGroup-sizing-default'
 								>
-									ჭერის სიმაღლე
+									მშენებლობის დასრულების თარიღი
 								</span>
 								<input
-									type='text'
+									type='date'
 									className='form-control'
 									aria-label='Sizing example input'
 									aria-describedby='inputGroup-sizing-default'
 									placeholder='0 მ'
 									defaultValue=''
-									ref={ceilingRef}
-									onChange={handleInput}
 								/>
 							</div>
+
 							<h3>მდებარეობა</h3>
-							<div className='input-group input-group-default mb-3'>
-								<input
-									type='text'
-									className='form-control'
-									aria-label='Sizing example input'
-									aria-describedby='inputGroup-sizing-default'
-									placeholder='ქალაქი'
+							<div className='input-group mb-3'>
+								<label
+									className='input-group-text'
+									htmlFor='inputGroupSelect011'
+								>
+									ქალაქი
+								</label>
+								<select
+									className='form-select'
+									id='inputGroupSelect011'
 									name='city'
 									onChange={handleInput}
-								/>
+								>
+									<option value=''>არჩევა</option>
+									{cityData.map((city, index) => (
+										<option key={index} value={city.city}>
+											{city.city}
+										</option>
+									))}
+								</select>
 							</div>
 							<div className='input-group input-group-default mb-3'>
 								<input
@@ -240,6 +274,8 @@ function Apartment() {
 						apartmentFloorRef={apartmentFloorRef}
 						maxApartmentRef={maxApartmentRef}
 						maxGuestsRef={maxGuestsRef}
+						ceilingRef={ceilingRef}
+						setChecked={setChecked}
 						submit={postData}
 					/>
 				</div>

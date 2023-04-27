@@ -12,6 +12,10 @@ function ParametersList({
 	apartmentFloorRef,
 	maxApartmentRef,
 	maxGuestsRef,
+	ceilingRef,
+	conditioner,
+	isChecked,
+	handleCheckboxChange,
 	submit,
 }) {
 	return (
@@ -20,38 +24,213 @@ function ParametersList({
 			<div className='row pt-4'>
 				<div className='col-md-6 col-12'>
 					<h3>პარამეტრები</h3>
+
+					<div className='input-group mb-3'>
+						<label className='input-group-text' htmlFor='inputGroupSelect01'>
+							მაქსიმალური სტუმრების რაოდენობა
+						</label>
+						<select
+							className='form-select'
+							id='inputGroupSelect01'
+							ref={maxGuestsRef}
+							onChange={allParameters}
+						>
+							<option value=''>არჩევა რაოდ</option>
+							<option value='1'>1</option>
+							<option value='2'>2</option>
+							<option value='3'>3</option>
+							<option value='4'>4</option>
+							<option value='5'>5</option>
+						</select>
+					</div>
 					<div className='input-group mb-3'>
 						<span className='input-group-text' id='inputGroup-sizing-default'>
-							სრული ფართი
+							ბინის კვადრატულობა
 						</span>
 						<input
 							type='text'
 							className='form-control'
 							aria-label='Sizing example input'
 							aria-describedby='inputGroup-sizing-default'
-							placeholder='ფართი'
-							name='area'
+							placeholder='ბინის კვადრატულობა'
+							ref={areaRef}
 							onChange={allParameters}
 						/>
 					</div>
-					<div className='input-group mb-3'>
-						<span className='input-group-text'>სართული</span>
+					<div className='input-group input-group-default mb-3'>
+						<span className='input-group-text' id='inputGroup-sizing-default'>
+							ჭერის სიმაღლე
+						</span>
 						<input
 							type='text'
-							aria-label='First name'
 							className='form-control'
-							placeholder='სართული სულ'
+							aria-label='Sizing example input'
+							aria-describedby='inputGroup-sizing-default'
+							placeholder='0 მ'
+							defaultValue=''
+							ref={ceilingRef}
+							onChange={allParameters}
+						/>
+					</div>
+
+					<div className='input-group mb-3'>
+						<label className='input-group-text' htmlFor='inputGroupSelect01'>
+							სართულების რაოდენობა
+						</label>
+						<select
+							className='form-select'
+							id='inputGroupSelect01'
 							ref={maxApartmentRef}
 							onChange={allParameters}
-						/>
-						<input
-							type='text'
-							aria-label='Last name'
-							className='form-control'
-							placeholder='სართული'
+						>
+							<option value=''>არჩევა რაოდ</option>
+							<option value='1'>1</option>
+							<option value='2'>2</option>
+							<option value='3'>3</option>
+							<option value='4'>4</option>
+							<option value='5'>5</option>
+							<option value='6'>6</option>
+							<option value='7'>7</option>
+							<option value='8'>8</option>
+							<option value='9'>9</option>
+							<option value='10'>10</option>
+							<option value='11'>11</option>
+							<option value='12'>12</option>
+							<option value='13'>13</option>
+							<option value='14'>14</option>
+							<option value='15'>15</option>
+							<option value='16'>16</option>
+						</select>
+					</div>
+					<div className='input-group mb-3'>
+						<label className='input-group-text' htmlFor='inputGroupSelect01'>
+							ბინის სართული
+						</label>
+						<select
+							className='form-select'
+							id='inputGroupSelect01'
 							ref={apartmentFloorRef}
 							onChange={allParameters}
+						>
+							<option value=''>არჩევა რაოდ</option>
+							<option value='1'>1</option>
+							<option value='2'>2</option>
+							<option value='3'>3</option>
+							<option value='4'>4</option>
+							<option value='5'>5</option>
+							<option value='6'>6</option>
+							<option value='7'>7</option>
+							<option value='8'>8</option>
+							<option value='9'>9</option>
+							<option value='10'>10</option>
+							<option value='11'>11</option>
+							<option value='12'>12</option>
+							<option value='13'>13</option>
+							<option value='14'>14</option>
+							<option value='15'>15</option>
+							<option value='16'>16</option>
+						</select>
+					</div>
+					<div class='form-check form-check-inline'>
+						<input
+							className='form-check-input'
+							type='checkbox'
+							id='inlineCheckbox1'
+							value={true}
+							checked={isChecked}
+							onChange={handleCheckboxChange}
 						/>
+						<label className='form-check-label' htmlFor='inlineCheckbox1'>
+							კონდიციონერი
+						</label>
+					</div>
+					<div class='form-check form-check-inline'>
+						<input
+							class='form-check-input'
+							type='checkbox'
+							id='inlineCheckbox2'
+							value='option2'
+						/>
+						<label class='form-check-label' htmlFor='inlineCheckbox2'>
+							ტელევიზორი
+						</label>
+					</div>
+					<div class='form-check form-check-inline'>
+						<input
+							class='form-check-input'
+							type='checkbox'
+							id='inlineCheckbox2'
+							value='option2'
+						/>
+						<label class='form-check-label' htmlFor='inlineCheckbox2'>
+							ინტერნეტი
+						</label>
+					</div>
+					<div class='form-check form-check-inline'>
+						<input
+							class='form-check-input'
+							type='checkbox'
+							id='inlineCheckbox2'
+							value='option2'
+						/>
+						<label class='form-check-label' htmlFor='inlineCheckbox2'>
+							ბუნებრივი აირი
+						</label>
+					</div>
+					<div class='form-check form-check-inline'>
+						<input
+							class='form-check-input'
+							type='checkbox'
+							id='inlineCheckbox2'
+							value='option2'
+						/>
+						<label class='form-check-label' htmlFor='inlineCheckbox2'>
+							ჭურჭლის სარეცხი მანქანა
+						</label>
+					</div>
+					<div class='form-check form-check-inline'>
+						<input
+							class='form-check-input'
+							type='checkbox'
+							id='inlineCheckbox2'
+							value='option2'
+						/>
+						<label class='form-check-label' htmlFor='inlineCheckbox2'>
+							აივანი
+						</label>
+					</div>
+					<div class='form-check form-check-inline'>
+						<input
+							class='form-check-input'
+							type='checkbox'
+							id='inlineCheckbox2'
+							value='option2'
+						/>
+						<label class='form-check-label' htmlFor='inlineCheckbox2'>
+							ვერანდა
+						</label>
+					</div>
+					<div class='form-check form-check-inline'>
+						<input
+							class='form-check-input'
+							type='checkbox'
+							id='inlineCheckbox2'
+							value='option2'
+						/>
+						<label class='form-check-label' htmlFor='inlineCheckbox2'>
+							ლიფტი
+						</label>
+					</div>
+					<div class='form-check form-check-inline'>
+						<input
+							class='form-check-input'
+							type='checkbox'
+							id='inlineCheckbox2'
+							value='option2'
+						/>
+						<label class='form-check-label mb-3' htmlFor='inlineCheckbox2'>
+							გათბობა
+						</label>
 					</div>
 					<div className='input-group mb-3'>
 						<label className='input-group-text' htmlFor='inputGroupSelect01'>
@@ -60,6 +239,7 @@ function ParametersList({
 						<select
 							className='form-select'
 							id='inputGroupSelect01'
+							name='room'
 							onChange={allParameters}
 						>
 							<option value=''>არჩევა რაოდ</option>
@@ -90,7 +270,7 @@ function ParametersList({
 					</div>
 					<div className='input-group mb-3'>
 						<label className='input-group-text' htmlFor='inputGroupSelect03'>
-							სველი წერტილი
+							აბაზანა
 						</label>
 						<select
 							className='form-select'
@@ -185,7 +365,7 @@ function ParametersList({
 							placeholder='Leave a comment here'
 							id='floatingTextarea2'
 							style={{ height: '100px' }}
-							ref={areaRef}
+							name='description'
 							onChange={allParameters}
 						></textarea>
 						<label htmlFor='floatingTextarea2'>აღწერა</label>
