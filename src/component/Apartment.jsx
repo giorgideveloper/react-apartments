@@ -2,26 +2,11 @@ import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import ParametersList from './ParametersList';
 import cityData from './cityData/cityData.json';
+import toast from '../helper/toast';
 
 function Apartment() {
 	//checkbox
-	const [airConditioner, setAirConditioner] = useState(false);
-	const [checked, setChecked] = useState([
-		{
-			name: 'user1',
-			checked: false,
-		},
-		{
-			name: 'user2',
-			checked: false,
-		},
-		{
-			name: 'user3',
-			checked: false,
-		},
-	]);
 
-	console.log(checked);
 	//  int ref
 	const mobileRef = useRef(null);
 	const currentRef = useRef(null);
@@ -35,6 +20,17 @@ function Apartment() {
 	const maxApartmentRef = useRef(null);
 	const maxGuestsRef = useRef(null);
 
+	const [checkboxes, setCheckboxes] = useState([
+		{ label: 'კონდიციონერი', checked: false },
+		{ label: 'ტელევიზორი', checked: false },
+		{ label: 'ინტერნეტი', checked: false },
+		{ label: 'ბუნებრივი აირი', checked: false },
+		{ label: 'ბუხარი', checked: false },
+		{ label: 'მაცივარი', checked: false },
+		{ label: 'სარეცხი მანქანა', checked: false },
+		{ label: 'ჭურჭლის სარეცხი მანქანა', checked: false },
+	]);
+
 	const [post, setPost] = useState({
 		main_category_type: '4',
 		building_status_type: '2',
@@ -44,7 +40,7 @@ function Apartment() {
 		rental_type: '',
 		title: 'ბინა ბათუმში',
 		youtube: '',
-		short_description: '',
+
 		description: '',
 		mobile: null,
 		city: '',
@@ -53,16 +49,17 @@ function Apartment() {
 		price: null,
 		area: null,
 		ceiling_height: null,
+		heating_type: '',
 		rooms: '',
 		bedrooms: null,
 		bathroom: null,
 		numbers_of_floors: null,
 		apartment_floor: null,
-		air_conditioner: false,
 		Parking_type: '',
 		max_guests: null,
 		hot_water_type: '',
 		Parking_type: '',
+		owner_name: '',
 		favorites: false,
 		user: 1,
 	});
@@ -80,6 +77,15 @@ function Apartment() {
 			apartment_floor: parseFloat(apartmentFloorRef.current.value),
 			numbers_of_floors: parseFloat(maxApartmentRef.current.value),
 			max_guests: parseFloat(maxGuestsRef.current.value),
+			air_conditioner: checkboxes[0].checked,
+			tv: checkboxes[1].checked,
+			internet: checkboxes[2].checked,
+			gas: checkboxes[3].checked,
+			fireplace: checkboxes[4].checked,
+			refrigerator: checkboxes[5].checked,
+			washing_machine: checkboxes[6].checked,
+			dishwasher: checkboxes[7].checked,
+
 			[event.target.name]: event.target.value,
 		});
 
@@ -104,8 +110,12 @@ function Apartment() {
 			.post(`https://api.geoevents.ge/api/apartment-create/`, post)
 			.then(res => {
 				console.log(res);
+				toast('success', 'Add item');
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+				console.log(err);
+				toast('warning', 'warning');
+			});
 	};
 
 	return (
@@ -275,7 +285,8 @@ function Apartment() {
 						maxApartmentRef={maxApartmentRef}
 						maxGuestsRef={maxGuestsRef}
 						ceilingRef={ceilingRef}
-						setChecked={setChecked}
+						checkboxes={checkboxes}
+						setCheckboxes={setCheckboxes}
 						submit={postData}
 					/>
 				</div>

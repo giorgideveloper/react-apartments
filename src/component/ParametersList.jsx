@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function ParametersList({
 	allParameters,
@@ -13,18 +13,27 @@ function ParametersList({
 	maxApartmentRef,
 	maxGuestsRef,
 	ceilingRef,
-	conditioner,
-	isChecked,
-	handleCheckboxChange,
+
+	checkboxes,
+	setCheckboxes,
 	submit,
 }) {
+	const handleCheckboxChange = index => {
+		const newCheckboxes = [...checkboxes];
+		newCheckboxes[index].checked = !newCheckboxes[index].checked;
+		setCheckboxes(newCheckboxes);
+	};
+
 	return (
 		<>
-			{' '}
 			<div className='row pt-4'>
 				<div className='col-md-6 col-12'>
 					<h3>პარამეტრები</h3>
 
+					<div>
+						Checkbox values:
+						{checkboxes.map(checkbox => checkbox.checked.toString())}
+					</div>
 					<div className='input-group mb-3'>
 						<label className='input-group-text' htmlFor='inputGroupSelect01'>
 							მაქსიმალური სტუმრების რაოდენობა
@@ -131,107 +140,20 @@ function ParametersList({
 							<option value='16'>16</option>
 						</select>
 					</div>
-					<div class='form-check form-check-inline'>
-						<input
-							className='form-check-input'
-							type='checkbox'
-							id='inlineCheckbox1'
-							value={true}
-							checked={isChecked}
-							onChange={handleCheckboxChange}
-						/>
-						<label className='form-check-label' htmlFor='inlineCheckbox1'>
-							კონდიციონერი
-						</label>
-					</div>
-					<div class='form-check form-check-inline'>
-						<input
-							class='form-check-input'
-							type='checkbox'
-							id='inlineCheckbox2'
-							value='option2'
-						/>
-						<label class='form-check-label' htmlFor='inlineCheckbox2'>
-							ტელევიზორი
-						</label>
-					</div>
-					<div class='form-check form-check-inline'>
-						<input
-							class='form-check-input'
-							type='checkbox'
-							id='inlineCheckbox2'
-							value='option2'
-						/>
-						<label class='form-check-label' htmlFor='inlineCheckbox2'>
-							ინტერნეტი
-						</label>
-					</div>
-					<div class='form-check form-check-inline'>
-						<input
-							class='form-check-input'
-							type='checkbox'
-							id='inlineCheckbox2'
-							value='option2'
-						/>
-						<label class='form-check-label' htmlFor='inlineCheckbox2'>
-							ბუნებრივი აირი
-						</label>
-					</div>
-					<div class='form-check form-check-inline'>
-						<input
-							class='form-check-input'
-							type='checkbox'
-							id='inlineCheckbox2'
-							value='option2'
-						/>
-						<label class='form-check-label' htmlFor='inlineCheckbox2'>
-							ჭურჭლის სარეცხი მანქანა
-						</label>
-					</div>
-					<div class='form-check form-check-inline'>
-						<input
-							class='form-check-input'
-							type='checkbox'
-							id='inlineCheckbox2'
-							value='option2'
-						/>
-						<label class='form-check-label' htmlFor='inlineCheckbox2'>
-							აივანი
-						</label>
-					</div>
-					<div class='form-check form-check-inline'>
-						<input
-							class='form-check-input'
-							type='checkbox'
-							id='inlineCheckbox2'
-							value='option2'
-						/>
-						<label class='form-check-label' htmlFor='inlineCheckbox2'>
-							ვერანდა
-						</label>
-					</div>
-					<div class='form-check form-check-inline'>
-						<input
-							class='form-check-input'
-							type='checkbox'
-							id='inlineCheckbox2'
-							value='option2'
-						/>
-						<label class='form-check-label' htmlFor='inlineCheckbox2'>
-							ლიფტი
-						</label>
-					</div>
-					<div class='form-check form-check-inline'>
-						<input
-							class='form-check-input'
-							type='checkbox'
-							id='inlineCheckbox2'
-							value='option2'
-						/>
-						<label class='form-check-label mb-3' htmlFor='inlineCheckbox2'>
-							გათბობა
-						</label>
-					</div>
+					{checkboxes.map((checkbox, index) => (
+						<div class='form-check form-check-inline'>
+							<label key={index}>
+								<input
+									className='form-check-input'
+									type='checkbox'
+									checked={checkbox.checked}
+									onChange={() => handleCheckboxChange(index)}
+								/>
+								{checkbox.label}
+							</label>
+						</div>
+					))}
+
 					<div className='input-group mb-3'>
 						<label className='input-group-text' htmlFor='inputGroupSelect01'>
 							ოთახები
@@ -239,7 +161,7 @@ function ParametersList({
 						<select
 							className='form-select'
 							id='inputGroupSelect01'
-							name='room'
+							name='rooms'
 							onChange={allParameters}
 						>
 							<option value=''>არჩევა რაოდ</option>
@@ -304,7 +226,7 @@ function ParametersList({
 							<option value='5'>ფასიანი პარკინგი</option>
 						</select>
 					</div>
-					<div className='input-group mb-3'>
+					{/* 	<div className='input-group mb-3'>
 						<label className='input-group-text' htmlFor='inputGroupSelect04'>
 							აუზი
 						</label>
@@ -313,7 +235,7 @@ function ParametersList({
 							<option value='1'>ღია</option>
 							<option value='2'>დახურული</option>
 						</select>
-					</div>
+					</div> */}
 					<div className='input-group mb-3'>
 						<label className='input-group-text' htmlFor='inputGroupSelect05'>
 							ცხელი წყალი
@@ -334,7 +256,11 @@ function ParametersList({
 						</select>
 					</div>
 					<div className='input-group mb-3'>
-						<label className='input-group-text' htmlFor='inputGroupSelect05'>
+						<label
+							className='input-group-text'
+							htmlFor='inputGroupSelect05'
+							name='heating_type'
+						>
 							გათბობა
 						</label>
 						<select className='form-select' id='inputGroupSelect05'>
@@ -346,8 +272,12 @@ function ParametersList({
 						</select>
 					</div>
 					<div className='input-group mb-3'>
-						<span className='input-group-text' id='inputGroup-sizing-default'>
-							სათაური
+						<span
+							className='input-group-text'
+							id='inputGroup-sizing-default'
+							name='owner_name'
+						>
+							მფლობელის სახელი
 						</span>
 						<input
 							type='text'
@@ -368,7 +298,7 @@ function ParametersList({
 							name='description'
 							onChange={allParameters}
 						></textarea>
-						<label htmlFor='floatingTextarea2'>აღწერა</label>
+						<label htmlFor='floatingTextarea2'>სრული აღწერა</label>
 					</div>
 					<div className='mb-3'>
 						<input
