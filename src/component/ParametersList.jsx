@@ -30,10 +30,6 @@ function ParametersList({
 				<div className='col-md-6 col-12'>
 					<h3>პარამეტრები</h3>
 
-					<div>
-						Checkbox values:
-						{checkboxes.map(checkbox => checkbox.checked.toString())}
-					</div>
 					<div className='input-group mb-3'>
 						<label className='input-group-text' htmlFor='inputGroupSelect01'>
 							მაქსიმალური სტუმრების რაოდენობა

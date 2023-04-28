@@ -3,6 +3,7 @@ import axios from 'axios';
 import ParametersList from './ParametersList';
 import cityData from './cityData/cityData.json';
 import toast from '../helper/toast';
+import Homepage from '../page/Homepage';
 
 function Apartment() {
 	//checkbox
@@ -111,6 +112,7 @@ function Apartment() {
 			.then(res => {
 				console.log(res);
 				toast('success', 'Add item');
+			
 			})
 			.catch(err => {
 				console.log(err);
