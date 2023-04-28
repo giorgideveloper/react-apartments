@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ApiService from '../service/ApiService';
+import { MdOutlineSpaceDashboard } from 'react-icons/md';
+import { MdOutlineBedroomParent } from 'react-icons/md';
+import { Gi3DStairs } from 'react-icons/gi';
 
 function PostPage() {
 	let { id } = useParams();
 	const [post, setPosts] = useState('');
+	const [categoryType, setCategoryType] = useState('');
 
 	const getPost = async () => {
 		await ApiService.getApartment(id)
@@ -18,6 +22,24 @@ function PostPage() {
 	useEffect(() => {
 		getPost();
 	}, []);
+
+	const typeSettings = () => {
+		if (post.main_category_type === '1') {
+			setCategoryType('იყიდება');
+		}
+		if (post.main_category_type === '2') {
+			setCategoryType('გირავდება');
+		}
+		if (post.main_category_type === '3') {
+			setCategoryType('ქირავდება');
+		}
+		if (post.main_category_type === '4') {
+			setCategoryType('ქირავდება დღიურად');
+		}
+	};
+	useEffect(() => {
+		typeSettings();
+	});
 
 	console.log(post);
 	return (
@@ -33,13 +55,54 @@ function PostPage() {
 								alt='...'
 							/>
 							<div className='card-body'>
-								<h6 className='card-title'>{post.title}</h6>
-								<p className='card-text'>{post.short_description}</p>
-								<p className='card-text fs-6'>{post.price}</p>
-								<p className='card-text fs-6'>{post.city}</p>
-								<p className='card-text fs-6'>{post.address}</p>
-								<p className='card-text fs-6'></p>
+								<h6 className='card-title fs-4'>{categoryType} ბინა ბათუმში</h6>
+
+								<p className='card-text fs-6 pt-2'>
+									<b>ქალაქი:</b> {post.city}{' '}
+								</p>
+								<p className='card-text fs-6'>
+									<b>ქუჩის მისამართი:</b> {post.address}
+								</p>
 							</div>
+						</div>
+					</div>
+					<div className='col-md-4'>
+						<p className=' fs-3 text-success fw-bold'>
+							ფასი: {post.price}
+							{post.Currency_type === 2 ? '$' : '₾'}
+						</p>
+						<p className=' fs-5 fw-bold '>ფართი {post.area} მ²</p>
+						<p>სახელი: {post.owner_name}</p>
+						<p>მობილური: {post.mobile}</p>
+					</div>
+				</div>
+				<div className='row pt-4'>
+					<div className='col-md-8'>
+						<div className='detail'>
+							<ul>
+								<li>
+									<MdOutlineSpaceDashboard /> {post.area} მ²
+									<p className='fs-6'>
+										ოთახი {post.room === '' ? '0' : post.room}
+									</p>
+								</li>
+								<li>
+									<MdOutlineBedroomParent /> {post.bedroom}{' '}
+									<p className='fs-6'>საძინებელი</p>
+								</li>
+								<li>
+									<Gi3DStairs />{' '}
+									{post.apartment_floor === null ? 0 : post.apartment_floor}{' '}
+									<p className='fs-6'>სართული</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div className='row pt-4'>
+					<div className='col-md-8'>
+						<div className='description'>
+							<p className='card-text'>{post.description}</p>
 						</div>
 					</div>
 				</div>

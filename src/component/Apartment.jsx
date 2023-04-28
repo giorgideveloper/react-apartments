@@ -3,7 +3,6 @@ import axios from 'axios';
 import ParametersList from './ParametersList';
 import cityData from './cityData/cityData.json';
 import toast from '../helper/toast';
-import Homepage from '../page/Homepage';
 
 function Apartment() {
 	//checkbox
@@ -33,15 +32,13 @@ function Apartment() {
 	]);
 
 	const [post, setPost] = useState({
-		main_category_type: '4',
-		building_status_type: '2',
+		main_category_type: '',
+		building_status_type: '',
 		collateral_type: '',
 		collateral_period: '',
 		collateral_agreement_type: '',
 		rental_type: '',
-		title: 'ბინა ბათუმში',
 		youtube: '',
-
 		description: '',
 		mobile: null,
 		city: '',
@@ -64,8 +61,6 @@ function Apartment() {
 		favorites: false,
 		user: 1,
 	});
-
-	console.log(post);
 
 	const handleInput = event => {
 		setPost({
@@ -112,7 +107,6 @@ function Apartment() {
 			.then(res => {
 				console.log(res);
 				toast('success', 'Add item');
-			
 			})
 			.catch(err => {
 				console.log(err);

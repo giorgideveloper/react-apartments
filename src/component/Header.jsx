@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { BsBuildingFillAdd } from 'react-icons/bs';
 
 function Header() {
 	return (
@@ -33,7 +34,7 @@ function Header() {
 						</ul>
 						<li className='nav-item'>
 							<Link className=' btn btn-success' to='addPost'>
-								Add apartment
+								<BsBuildingFillAdd /> Add apartment
 							</Link>
 						</li>
 					</div>

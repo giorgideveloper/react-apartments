@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ApiService from '../service/ApiService';
 import { Link } from 'react-router-dom';
+import { HiLocationMarker } from 'react-icons/hi';
+import { RiDeleteBin2Fill } from 'react-icons/ri';
 
 function GetApartments() {
 	const [apartments, setApartment] = useState();
@@ -16,6 +18,11 @@ function GetApartments() {
 			});
 	};
 
+	const deleteApartments = id => {
+		ApiService.deleteApartment(id).then(response => {
+			console.log('deleted successfully!');
+		});
+	};
 	useEffect(() => {
 		getAllApartments();
 	}, []);
@@ -34,13 +41,23 @@ function GetApartments() {
 									alt='...'
 								/>
 								<div className='card-body'>
-									<h6 className='card-title'>{apartment.title}</h6>
-									<p className='card-text'>{apartment.short_description}</p>
-									<p className='card-text fs-6'>{apartment.address}</p>
-
-									<Link to={`api/apartment-list/${apartment.id}`}>
-										<button>Go somewhere</button>
-									</Link>
+									<h6 className='card-title'>ბინა ბათუმში</h6>
+									<p className='card-text'>
+										{apartment.description.slice(0, 50)}
+									</p>
+									<p className='card-text fs-6'>
+										<HiLocationMarker />
+										{apartment.address}
+									</p>
+									<div className='card-delete-body'>
+										<Link to={`api/apartment-list/${apartment.id}`}>
+											<button>Go somewhere</button>
+										</Link>
+										<RiDeleteBin2Fill
+											className='fs-4 text-danger'
+											onClick={() => deleteApartments(apartment.id)}
+										/>
+									</div>
 								</div>
 							</div>
 						</div>

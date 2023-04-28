@@ -11,12 +11,15 @@ const api = axios.create({
 
 export default {
 	getApartments() {
-		return api.get('apartment-list');
+		return api.get('apartment-list/');
 	},
 	getApartment(id) {
 		return api.get(`apartment-list/${id}`);
 	},
 	addApartment(str) {
 		return api.post('apartment-create/', { title: str });
+	},
+	deleteApartment(id) {
+		return api.delete(`apartment-create/${id}`);
 	},
 };
