@@ -3,10 +3,10 @@ import axios from 'axios';
 import ParametersList from './ParametersList';
 import cityData from './cityData/cityData.json';
 import toast from '../helper/toast';
+import { useNavigate } from 'react-router';
 
 function Apartment() {
-	//checkbox
-
+	const navigate = useNavigate();
 	//  int ref
 	const mobileRef = useRef(null);
 	const currentRef = useRef(null);
@@ -19,7 +19,7 @@ function Apartment() {
 	const apartmentFloorRef = useRef(null);
 	const maxApartmentRef = useRef(null);
 	const maxGuestsRef = useRef(null);
-
+	//checkbox
 	const [checkboxes, setCheckboxes] = useState([
 		{ label: 'კონდიციონერი', checked: false },
 		{ label: 'ტელევიზორი', checked: false },
@@ -107,6 +107,7 @@ function Apartment() {
 			.then(res => {
 				console.log(res);
 				toast('success', 'Add item');
+				navigate('/', { replace: true });
 			})
 			.catch(err => {
 				console.log(err);

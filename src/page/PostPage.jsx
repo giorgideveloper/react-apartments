@@ -41,7 +41,7 @@ function PostPage() {
 		typeSettings();
 	});
 
-	console.log(post);
+	console.log(post.bedroom);
 	return (
 		<>
 			<div className='container'>
@@ -73,7 +73,7 @@ function PostPage() {
 						</p>
 						<p className=' fs-5 fw-bold '>ფართი {post.area} მ²</p>
 						<p>სახელი: {post.owner_name}</p>
-						<p>მობილური: {post.mobile}</p>
+						<p>მობილური: {post.mobile === null ? '0' : post.bedroom}</p>
 					</div>
 				</div>
 				<div className='row pt-4'>
@@ -83,16 +83,17 @@ function PostPage() {
 								<li>
 									<MdOutlineSpaceDashboard /> {post.area} მ²
 									<p className='fs-6'>
-										ოთახი {post.room === '' ? '0' : post.room}
+										ოთახი {post.room === null ? '0' : post.room}
 									</p>
 								</li>
 								<li>
-									<MdOutlineBedroomParent /> {post.bedroom}{' '}
+									<MdOutlineBedroomParent />{' '}
+									{post.bedroom === null ? '0' : post.bedroom}{' '}
 									<p className='fs-6'>საძინებელი</p>
 								</li>
 								<li>
 									<Gi3DStairs />{' '}
-									{post.apartment_floor === null ? 0 : post.apartment_floor}{' '}
+									{post.apartment_floor === null ? '0' : post.apartment_floor}{' '}
 									<p className='fs-6'>სართული</p>
 								</li>
 							</ul>
@@ -102,8 +103,84 @@ function PostPage() {
 				<div className='row pt-4'>
 					<div className='col-md-8'>
 						<div className='description'>
+							<h3>მოკლე აღწერა</h3>
 							<p className='card-text'>{post.description}</p>
 						</div>
+					</div>
+				</div>
+				<div className='row pt-4'>
+					<div className='col-md-8'>
+						<h3> პარამეტრები</h3>
+						<ul>
+							<li>
+								{post.internet === true ? (
+									'ინტერნეტი'
+								) : (
+									<span className='text-decoration-line-through'>
+										ინტერნეტი
+									</span>
+								)}
+							</li>
+							<li>
+								{post.gas === true ? (
+									'ბუნებრივი აირი'
+								) : (
+									<span className='text-decoration-line-through'>
+										ბუნებრივი აირი
+									</span>
+								)}
+							</li>
+							<li>
+								{post.air_conditioner === true ? (
+									'კონდიციონერი'
+								) : (
+									<span className='text-decoration-line-through'>
+										კონდიციონერი
+									</span>
+								)}
+							</li>
+							<li>
+								{post.tv === true ? (
+									'ტელევიზორი'
+								) : (
+									<span className='text-decoration-line-through'>
+										ტელევიზორი
+									</span>
+								)}
+							</li>
+							<li>
+								{post.fireplace === true ? (
+									'ბუხარი'
+								) : (
+									<span className='text-decoration-line-through'>ბუხარი</span>
+								)}
+							</li>
+							<li>
+								{post.refrigerator === true ? (
+									'მაცივარი'
+								) : (
+									<span className='text-decoration-line-through'>მაცივარი</span>
+								)}
+							</li>
+							<li>
+								{post.washing_machine === true ? (
+									'სარეცხი მანქანა'
+								) : (
+									<span className='text-decoration-line-through'>
+										სარეცხი მანქანა
+									</span>
+								)}
+							</li>
+							<li>
+								{post.dishwasher === true ? (
+									'ჭურჭლის სარეცხი მანქანა'
+								) : (
+									<span className='text-decoration-line-through'>
+										ჭურჭლის სარეცხი მანქანა
+									</span>
+								)}
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>

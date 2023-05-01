@@ -137,7 +137,7 @@ function ParametersList({
 						</select>
 					</div>
 					{checkboxes.map((checkbox, index) => (
-						<div class='form-check form-check-inline'>
+						<div key={index} className='form-check form-check-inline'>
 							<label key={index}>
 								<input
 									className='form-check-input'
@@ -273,15 +273,33 @@ function ParametersList({
 							id='inputGroup-sizing-default'
 							name='owner_name'
 						>
-							მფლობელის სახელი
+							მესაკუთრის სახელი
 						</span>
 						<input
 							type='text'
 							className='form-control'
 							aria-label='Sizing example input'
 							aria-describedby='inputGroup-sizing-default'
-							placeholder='სათაური'
-							name='title'
+							placeholder='მფლობელის სახელი'
+							name='owner_name'
+							onChange={allParameters}
+						/>
+					</div>
+					<div className='input-group mb-3'>
+						<span
+							className='input-group-text'
+							id='inputGroup-sizing-default'
+							name='owner_name'
+						>
+							მობილური
+						</span>
+						<input
+							type='text'
+							className='form-control'
+							aria-label='Sizing example input'
+							aria-describedby='inputGroup-sizing-default'
+							placeholder='მობილური'
+							name='mobile'
 							onChange={allParameters}
 						/>
 					</div>

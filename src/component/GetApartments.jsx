@@ -33,8 +33,8 @@ function GetApartments() {
 			<div className='container'>
 				<div className='row pt-4'>
 					{apartments?.map(apartment => (
-						<div className='col-md-4 col-12' key={apartment.id}>
-							<div className='card' style={{ width: '100%' }}>
+						<div className='col-md-4 col-12 pt-4' key={apartment.id}>
+							<div className='card ' style={{ width: '100%' }}>
 								<img
 									src={apartment.image1}
 									className='card-img-top'
@@ -51,7 +51,9 @@ function GetApartments() {
 									</p>
 									<div className='card-delete-body'>
 										<Link to={`api/apartment-list/${apartment.id}`}>
-											<button>Go somewhere</button>
+											<button type='button' className='btn btn-secondary'>
+												Go somewhere
+											</button>
 										</Link>
 										<RiDeleteBin2Fill
 											className='fs-4 text-danger'
