@@ -73,7 +73,7 @@ function PostPage() {
 						</p>
 						<p className=' fs-5 fw-bold '>ფართი {post.area} მ²</p>
 						<p>სახელი: {post.owner_name}</p>
-						<p>მობილური: {post.mobile === null ? '0' : post.bedroom}</p>
+						<p>მობილური: {post.mobile === null ? '0' : post.mobile}</p>
 					</div>
 				</div>
 				<div className='row pt-4'>

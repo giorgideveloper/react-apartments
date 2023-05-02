@@ -25,10 +25,10 @@ function Apartment() {
 		{ label: 'ტელევიზორი', checked: false },
 		{ label: 'ინტერნეტი', checked: false },
 		{ label: 'ბუნებრივი აირი', checked: false },
-		{ label: 'ბუხარი', checked: false },
-		{ label: 'მაცივარი', checked: false },
-		{ label: 'სარეცხი მანქანა', checked: false },
 		{ label: 'ჭურჭლის სარეცხი მანქანა', checked: false },
+		{ label: 'აივანი', checked: false },
+		{ label: 'ვერანდა', checked: false },
+		{ label: 'ლიფტი', checked: false },
 	]);
 
 	const [post, setPost] = useState({
@@ -77,10 +77,10 @@ function Apartment() {
 			tv: checkboxes[1].checked,
 			internet: checkboxes[2].checked,
 			gas: checkboxes[3].checked,
-			fireplace: checkboxes[4].checked,
-			refrigerator: checkboxes[5].checked,
-			washing_machine: checkboxes[6].checked,
-			dishwasher: checkboxes[7].checked,
+			dishwasher: checkboxes[4].checked,
+			balcony: checkboxes[5].checked,
+			veranda: checkboxes[6].checked,
+			service_elevator: checkboxes[7].checked,
 
 			[event.target.name]: event.target.value,
 		});
@@ -231,6 +231,7 @@ function Apartment() {
 									aria-describedby='inputGroup-sizing-default'
 									placeholder='0 მ'
 									defaultValue=''
+									name='building_year'
 								/>
 							</div>
 

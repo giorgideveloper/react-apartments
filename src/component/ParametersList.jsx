@@ -77,7 +77,60 @@ function ParametersList({
 							onChange={allParameters}
 						/>
 					</div>
-
+					<div className='input-group mb-3'>
+						<label className='input-group-text' htmlFor='inputGroupSelect01'>
+							ოთახების რაოდენობა
+						</label>
+						<select
+							className='form-select'
+							id='inputGroupSelect01'
+							name='rooms'
+							onChange={allParameters}
+						>
+							<option value=''>არჩევა რაოდ</option>
+							<option value='1'>1</option>
+							<option value='2'>2</option>
+							<option value='3'>3</option>
+							<option value='4'>4</option>
+							<option value='5'>5</option>
+						</select>
+					</div>
+					<div className='input-group mb-3'>
+						<label className='input-group-text' htmlFor='inputGroupSelect02'>
+							საძინებელი
+						</label>
+						<select
+							className='form-select'
+							id='inputGroupSelect02'
+							ref={bedroomsRef}
+							onChange={allParameters}
+						>
+							<option value=''>არჩევა რაოდ</option>
+							<option value='1'>1</option>
+							<option value='2'>2</option>
+							<option value='3'>3</option>
+							<option value='4'>4</option>
+							<option value='5'>5</option>
+						</select>
+					</div>
+					<div className='input-group mb-3'>
+						<label className='input-group-text' htmlFor='inputGroupSelect03'>
+							აბაზანა
+						</label>
+						<select
+							className='form-select'
+							id='inputGroupSelect03'
+							ref={bathroomRef}
+							onChange={allParameters}
+						>
+							<option value=''>არჩევა რაოდ</option>
+							<option value='1'>1</option>
+							<option value='2'>2</option>
+							<option value='3'>3</option>
+							<option value='4'>4</option>
+							<option value='5'>5</option>
+						</select>
+					</div>
 					<div className='input-group mb-3'>
 						<label className='input-group-text' htmlFor='inputGroupSelect01'>
 							სართულების რაოდენობა
@@ -149,79 +202,23 @@ function ParametersList({
 							</label>
 						</div>
 					))}
-
 					<div className='input-group mb-3'>
-						<label className='input-group-text' htmlFor='inputGroupSelect01'>
-							ოთახები
-						</label>
-						<select
-							className='form-select'
-							id='inputGroupSelect01'
-							name='rooms'
-							onChange={allParameters}
+						<label
+							className='input-group-text'
+							htmlFor='inputGroupSelect05'
+							name='heating_type'
 						>
-							<option value=''>არჩევა რაოდ</option>
-							<option value='1'>1</option>
-							<option value='2'>2</option>
-							<option value='3'>3</option>
-							<option value='4'>4</option>
-							<option value='5'>5</option>
-						</select>
-					</div>
-					<div className='input-group mb-3'>
-						<label className='input-group-text' htmlFor='inputGroupSelect02'>
-							საძინებელი
+							გათბობა
 						</label>
-						<select
-							className='form-select'
-							id='inputGroupSelect02'
-							ref={bedroomsRef}
-							onChange={allParameters}
-						>
-							<option value=''>არჩევა რაოდ</option>
-							<option value='1'>1</option>
-							<option value='2'>2</option>
-							<option value='3'>3</option>
-							<option value='4'>4</option>
-							<option value='5'>5</option>
-						</select>
-					</div>
-					<div className='input-group mb-3'>
-						<label className='input-group-text' htmlFor='inputGroupSelect03'>
-							აბაზანა
-						</label>
-						<select
-							className='form-select'
-							id='inputGroupSelect03'
-							ref={bathroomRef}
-							onChange={allParameters}
-						>
-							<option value=''>არჩევა რაოდ</option>
-							<option value='1'>1</option>
-							<option value='2'>2</option>
-							<option value='3'>3</option>
-							<option value='4'>4</option>
-							<option value='5'>5</option>
-						</select>
-					</div>
-					<div className='input-group mb-3'>
-						<label className='input-group-text' htmlFor='inputGroupSelect04'>
-							პარკინგი
-						</label>
-						<select
-							className='form-select'
-							id='inputGroupSelect04'
-							name='Parking_type'
-							onChange={allParameters}
-						>
+						<select className='form-select' id='inputGroupSelect05'>
 							<option value=''>აირჩიე</option>
-							<option value='1'>ეზოს პარკინგი</option>
-							<option value='2'>ავტოფარეხი</option>
-							<option value='3'>პარკინგის ადგილი</option>
-							<option value='4'>მიწისქვეშა პარკინგი</option>
-							<option value='5'>ფასიანი პარკინგი</option>
+							<option value='1'>ცენტრალური გათბობა</option>
+							<option value='2'>გაზის გამათბობელი</option>
+							<option value='3'>დენის გამათბობელი</option>
+							<option value='4'>იატაკის გათბობა</option>
 						</select>
 					</div>
+
 					{/* 	<div className='input-group mb-3'>
 						<label className='input-group-text' htmlFor='inputGroupSelect04'>
 							აუზი
@@ -252,20 +249,43 @@ function ParametersList({
 						</select>
 					</div>
 					<div className='input-group mb-3'>
-						<label
-							className='input-group-text'
-							htmlFor='inputGroupSelect05'
-							name='heating_type'
-						>
-							გათბობა
+						<label className='input-group-text' htmlFor='inputGroupSelect04'>
+							პარკინგი
 						</label>
-						<select className='form-select' id='inputGroupSelect05'>
+						<select
+							className='form-select'
+							id='inputGroupSelect04'
+							name='Parking_type'
+							onChange={allParameters}
+						>
 							<option value=''>აირჩიე</option>
-							<option value='1'>ცენტრალური გათბობა</option>
-							<option value='2'>გაზის გამათბობელი</option>
-							<option value='3'>დენის გამათბობელი</option>
-							<option value='4'>იატაკის გათბობა</option>
+							<option value='1'>ეზოს პარკინგი</option>
+							<option value='2'>ავტოფარეხი</option>
+							<option value='3'>პარკინგის ადგილი</option>
+							<option value='4'>მიწისქვეშა პარკინგი</option>
+							<option value='5'>ფასიანი პარკინგი</option>
 						</select>
+					</div>
+					<div className='input-group mb-3'>
+						<span className='input-group-text'>ფასი</span>
+						<select
+							className='form-select'
+							id='inputGroupSelect05'
+							name='Currency_type'
+							onChange={allParameters}
+						>
+							<option value=''>აირჩიე</option>
+							<option value='1'>დოლარი</option>
+							<option value='2'>ლარი</option>
+						</select>
+						<input
+							type='text'
+							aria-label='Last name'
+							className='form-control'
+							placeholder='სრული ფასი '
+							ref={priceRef}
+							onChange={allParameters}
+						/>
 					</div>
 					<div className='input-group mb-3'>
 						<span
@@ -326,23 +346,20 @@ function ParametersList({
 						</div>
 					</div>
 					<div className='input-group mb-3'>
-						<span className='input-group-text'>ფასი</span>
-						<select
-							className='form-select'
-							id='inputGroupSelect05'
-							name='Currency_type'
-							onChange={allParameters}
+						<span
+							className='input-group-text'
+							id='inputGroup-sizing-default'
+							name='owner_name'
 						>
-							<option value=''>აირჩიე</option>
-							<option value='1'>დოლარი</option>
-							<option value='2'>ლარი</option>
-						</select>
+							Youtube
+						</span>
 						<input
 							type='text'
-							aria-label='Last name'
 							className='form-control'
-							placeholder='სრული ფასი '
-							ref={priceRef}
+							aria-label='Sizing example input'
+							aria-describedby='inputGroup-sizing-default'
+							placeholder='youtube'
+							name='youtube'
 							onChange={allParameters}
 						/>
 					</div>
