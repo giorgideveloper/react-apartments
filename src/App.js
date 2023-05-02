@@ -1,4 +1,4 @@
-import './App.css';
+import './assets/Style/Main.css';
 import './Routes';
 import Header from './Layouts/Header/Header';
 import MainRoute from './Routes';
