@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import axios from 'axios';
 import ParametersList from './ParametersList';
 import cityData from './cityData/cityData.json';
 import toast from '../helper/toast';
@@ -9,17 +8,9 @@ import ApiService from '../service/ApiService';
 function Apartment() {
 	const navigate = useNavigate();
 	//  int ref
-	const mobileRef = useRef(null);
-	const currentRef = useRef(null);
-	const priceRef = useRef(null);
-	const areaRef = useRef(null);
+
 	const ceilingRef = useRef(null);
-	const bedroomsRef = useRef(null);
-	const bathroomRef = useRef(null);
-	const numbersRef = useRef(null);
-	const apartmentFloorRef = useRef(null);
-	const maxApartmentRef = useRef(null);
-	const maxGuestsRef = useRef(null);
+
 	//checkbox
 	const [checkboxes, setCheckboxes] = useState([
 		{ label: 'კონდიციონერი', checked: false },
@@ -42,6 +33,7 @@ function Apartment() {
 		youtube: '',
 		description: '',
 		mobile: null,
+		building_year: null,
 		city: '',
 		address: '',
 		Currency_type: '1',
@@ -66,14 +58,7 @@ function Apartment() {
 	const handleInput = event => {
 		setPost({
 			...post,
-			price: parseFloat(priceRef.current.value),
-			area: parseFloat(areaRef.current.value),
 			ceiling_height: parseFloat(ceilingRef.current.value),
-			bedrooms: parseFloat(bedroomsRef.current.value),
-			bathroom: parseFloat(bathroomRef.current.value),
-			apartment_floor: parseFloat(apartmentFloorRef.current.value),
-			numbers_of_floors: parseFloat(maxApartmentRef.current.value),
-			max_guests: parseFloat(maxGuestsRef.current.value),
 			air_conditioner: checkboxes[0].checked,
 			tv: checkboxes[1].checked,
 			internet: checkboxes[2].checked,
@@ -82,7 +67,6 @@ function Apartment() {
 			balcony: checkboxes[5].checked,
 			veranda: checkboxes[6].checked,
 			service_elevator: checkboxes[7].checked,
-
 			[event.target.name]: event.target.value,
 		});
 
@@ -272,16 +256,6 @@ function Apartment() {
 					</div>
 					<ParametersList
 						allParameters={handleInput}
-						mobileRef={mobileRef}
-						currentRef={currentRef}
-						priceRef={priceRef}
-						areaRef={areaRef}
-						bedroomsRef={bedroomsRef}
-						bathroomRef={bathroomRef}
-						numbersRef={numbersRef}
-						apartmentFloorRef={apartmentFloorRef}
-						maxApartmentRef={maxApartmentRef}
-						maxGuestsRef={maxGuestsRef}
 						ceilingRef={ceilingRef}
 						checkboxes={checkboxes}
 						setCheckboxes={setCheckboxes}

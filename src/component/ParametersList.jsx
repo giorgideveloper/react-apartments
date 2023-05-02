@@ -2,18 +2,7 @@ import React, { useState } from 'react';
 
 function ParametersList({
 	allParameters,
-	mobileRef,
-	currentRef,
-	priceRef,
-	areaRef,
-	bedroomsRef,
-	bathroomRef,
-	numbersRef,
-	apartmentFloorRef,
-	maxApartmentRef,
-	maxGuestsRef,
 	ceilingRef,
-
 	checkboxes,
 	setCheckboxes,
 	submit,
@@ -37,7 +26,7 @@ function ParametersList({
 						<select
 							className='form-select'
 							id='inputGroupSelect01'
-							ref={maxGuestsRef}
+							name='max_guests'
 							onChange={allParameters}
 						>
 							<option value=''>არჩევა რაოდ</option>
@@ -58,7 +47,7 @@ function ParametersList({
 							aria-label='Sizing example input'
 							aria-describedby='inputGroup-sizing-default'
 							placeholder='ბინის კვადრატულობა'
-							ref={areaRef}
+							name='area'
 							onChange={allParameters}
 						/>
 					</div>
@@ -102,7 +91,7 @@ function ParametersList({
 						<select
 							className='form-select'
 							id='inputGroupSelect02'
-							ref={bedroomsRef}
+							name='bedroom'
 							onChange={allParameters}
 						>
 							<option value=''>არჩევა რაოდ</option>
@@ -120,7 +109,7 @@ function ParametersList({
 						<select
 							className='form-select'
 							id='inputGroupSelect03'
-							ref={bathroomRef}
+							name='bathroom'
 							onChange={allParameters}
 						>
 							<option value=''>არჩევა რაოდ</option>
@@ -138,7 +127,7 @@ function ParametersList({
 						<select
 							className='form-select'
 							id='inputGroupSelect01'
-							ref={maxApartmentRef}
+							name='apartment_floor'
 							onChange={allParameters}
 						>
 							<option value=''>არჩევა რაოდ</option>
@@ -167,7 +156,7 @@ function ParametersList({
 						<select
 							className='form-select'
 							id='inputGroupSelect01'
-							ref={apartmentFloorRef}
+							name='numbers_of_floors'
 							onChange={allParameters}
 						>
 							<option value=''>არჩევა რაოდ</option>
@@ -283,7 +272,7 @@ function ParametersList({
 							aria-label='Last name'
 							className='form-control'
 							placeholder='სრული ფასი '
-							ref={priceRef}
+							name='price'
 							onChange={allParameters}
 						/>
 					</div>

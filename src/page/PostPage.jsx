@@ -69,7 +69,7 @@ function PostPage() {
 					<div className='col-md-4'>
 						<p className=' fs-3 text-success fw-bold'>
 							ფასი: {post.price}
-							{post.Currency_type === 2 ? '$' : '₾'}
+							{post.Currency_type === 1 ? '$' : '₾'}
 						</p>
 						<p className=' fs-5 fw-bold '>ფართი {post.area} მ²</p>
 						<p>სახელი: {post.owner_name}</p>
