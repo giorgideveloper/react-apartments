@@ -4,6 +4,7 @@ import ParametersList from './ParametersList';
 import cityData from './cityData/cityData.json';
 import toast from '../helper/toast';
 import { useNavigate } from 'react-router';
+import ApiService from '../service/ApiService';
 
 function Apartment() {
 	const navigate = useNavigate();
@@ -102,8 +103,7 @@ function Apartment() {
 	}; */
 
 	const postData = () => {
-		axios
-			.post(`https://api.geoevents.ge/api/apartment-create/`, post)
+		ApiService.addApartment(post)
 			.then(res => {
 				console.log(res);
 				toast('success', 'Add item');

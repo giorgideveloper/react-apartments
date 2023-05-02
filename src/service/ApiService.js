@@ -17,7 +17,7 @@ export default {
 		return api.get(`apartment-list/${id}`);
 	},
 	addApartment(str) {
-		return api.post('apartment-create/', { title: str });
+		return api.post('apartment-create/', str);
 	},
 	deleteApartment(id) {
 		return api.delete(`apartment-create/${id}`);
