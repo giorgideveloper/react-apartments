@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Apartment from './Apartment';
-import HomeList from './HomeList';
+import AddApartment from '../AddApatment/AddApartment';
+import AddHome from '../AddHome/AddHome';
 
-function AddPost() {
+function Addition() {
 	const [selects, setSelects] = useState();
 	console.log(selects);
 	return (
@@ -33,8 +33,8 @@ function AddPost() {
 				</div>
 				<div className='row'>
 					<div className='content'>
-						{(selects === 'apartment' && <Apartment />) ||
-							(selects === 'home' && <HomeList />) ||
+						{(selects === 'apartment' && <AddApartment />) ||
+							(selects === 'home' && <AddHome />) ||
 							(selects === 'space' && <h2>კომერციული ფართი</h2>) ||
 							(selects === 'land' && <h2>მიწის ნაკვეთი</h2>) ||
 							(selects === 'hotel' && <h2>სასტუმრო</h2>)}
@@ -45,4 +45,4 @@ function AddPost() {
 	);
 }
 
-export default AddPost;
+export default Addition;

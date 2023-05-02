@@ -1,16 +1,15 @@
 import React, { useRef, useState } from 'react';
-import ParametersList from './ParametersList';
-import cityData from './cityData/cityData.json';
-import toast from '../helper/toast';
-import { useNavigate } from 'react-router';
-import ApiService from '../service/ApiService';
+import ParametersList from '../ParametersList';
+import cityData from '../cityData/cityData.json';
 
-function Apartment() {
+import { useNavigate } from 'react-router';
+import ApiService from '../../service/ApiService';
+import toast from '../../helper/toast';
+
+function AddApartment() {
 	const navigate = useNavigate();
 	//  int ref
-
 	const ceilingRef = useRef(null);
-
 	//checkbox
 	const [checkboxes, setCheckboxes] = useState([
 		{ label: 'კონდიციონერი', checked: false },
@@ -36,7 +35,7 @@ function Apartment() {
 		building_year: null,
 		city: '',
 		address: '',
-		Currency_type: '1',
+		Currency_type: '',
 		price: null,
 		area: null,
 		ceiling_height: null,
@@ -49,7 +48,6 @@ function Apartment() {
 		Parking_type: '',
 		max_guests: null,
 		hot_water_type: '',
-		Parking_type: '',
 		owner_name: '',
 		favorites: false,
 		user: 1,
@@ -69,25 +67,10 @@ function Apartment() {
 			service_elevator: checkboxes[7].checked,
 			[event.target.name]: event.target.value,
 		});
-
-		/* 	setCurrent({
-			...post,
-			Currency_type: parseFloat(currentRef.current.value),
-		}); */
 	};
 
-	/* const token = '2649637d51088234890f12de0146dad3c47d1426'; */
-
-	/* 	const config = {
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${token}`,
-			user: 2,
-		},
-	}; */
-
-	const postData = () => {
-		ApiService.addApartment(post)
+	const postData = async () => {
+		await ApiService.addApartment(post)
 			.then(res => {
 				console.log(res);
 				toast('success', 'Add item');
@@ -267,4 +250,4 @@ function Apartment() {
 	);
 }
 
-export default Apartment;
+export default AddApartment;

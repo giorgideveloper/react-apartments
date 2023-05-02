@@ -1,11 +1,11 @@
 import React from 'react';
 
-import AddPost from '../component/AddPost';
+import Addition from '../component/Addition/Addition';
 
 function AddPage() {
 	return (
 		<>
-			<AddPost />
+			<Addition />
 		</>
 	);
 }
