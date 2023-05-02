@@ -3,13 +3,14 @@ import ApiService from '../service/ApiService';
 import { Link } from 'react-router-dom';
 import { HiLocationMarker } from 'react-icons/hi';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
+import toast from '../helper/toast';
 
 function GetApartments() {
 	const [apartments, setApartment] = useState();
 
 	// Get all Apartments
-	const getAllApartments = () => {
-		ApiService.getApartments()
+	const getAllApartments = async () => {
+		await ApiService.getApartments()
 			.then(function (res) {
 				setApartment(res.data);
 			})
@@ -18,10 +19,17 @@ function GetApartments() {
 			});
 	};
 
-	const deleteApartments = id => {
-		ApiService.deleteApartment(id).then(response => {
-			console.log('deleted successfully!');
-		});
+	const deleteApartments = async id => {
+		await ApiService.deleteApartment(id)
+			.then(response => {
+				console.log(response, 'deleted successfully!');
+				toast('success', 'Apartment deleted successfully!');
+				getAllApartments();
+			})
+			.catch(function (error) {
+				console.log(error);
+				toast('error', 'Apartment could not be deleted');
+			});
 	};
 	useEffect(() => {
 		getAllApartments();

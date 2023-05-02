@@ -20,6 +20,6 @@ export default {
 		return api.post('apartment-create/', str);
 	},
 	deleteApartment(id) {
-		return api.delete(`apartment-create/${id}`);
+		return api.delete(`apartment-update/${id}`);
 	},
 };
