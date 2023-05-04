@@ -57,7 +57,7 @@ function GetApartments() {
                     {apartment.address}
                   </p>
                   <div className="card-delete-body">
-                    <Link to={`api/apartment-list/${apartment.id}`}>
+                    <Link to={`/apartments/${apartment.id}`}>
                       <button type="button" className="btn btn-secondary">
                         Go somewhere
                       </button>

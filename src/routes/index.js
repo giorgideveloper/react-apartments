@@ -9,8 +9,8 @@ export const Router = () => (
   <>
     <Routes>
       <Route path="/" element={<Homepage />} />
-      <Route path="api/apartment-list/:id" element={<PostPage />} />
-      <Route path="addPost" element={<AddPage />} />
+      <Route path="/apartments/:id" element={<PostPage />} />
+      <Route path="/apartments/create" element={<AddPage />} />
       <Route path="*" element={<NotfoundPage />} />
     </Routes>
   </>
