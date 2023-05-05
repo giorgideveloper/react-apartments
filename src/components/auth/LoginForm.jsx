@@ -139,9 +139,24 @@ function LoginForm() {
                     ""
                   )}
                 </button>
-                <a href="#!" className="btn btn-link">
+                <a href="#!" className="btn btn-link disabled">
                   Register
                 </a>
+                <div className="mt-2">
+                  <button
+                    type="button"
+                    className="btn btn-link text-decoration-none px-0"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      values.username = "user";
+                      values.email = "mail@mail.ru";
+                      values.password = "Paroli12345";
+                      handleSubmit();
+                    }}
+                  >
+                    Login with demo user
+                  </button>
+                </div>
               </form>
             )}
           </Formik>
