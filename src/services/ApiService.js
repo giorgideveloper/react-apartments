@@ -10,7 +10,24 @@ const instance = axios.create({
   },
 });
 
-// Requests
+/**
+ * Set token for axios instance
+ *
+ * @param {*} token
+ */
+export const setToken = (token) => {
+  instance.defaults.withCredentials = true;
+  instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+};
+
+// Auth endpoints
+const auth = "/auth";
+export const login = (data) => instance.post(`${auth}/login/`, data);
+export const logout = () => instance.post(`${auth}/logout/`);
+export const register = (data) => instance.post(`${auth}/registration/`, data);
+export const user = () => instance.get(`${auth}/user/`);
+
+// Apartments endpoints
 export const getApartments = () => instance.get("/apartments");
 export const getApartmentById = (id) => instance.get(`/apartments/${id}`);
 export const addApartment = (data) => instance.post("/apartments", data);
