@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
 function Footer() {
-	return (
-		<>
-			<footer>
-				<h1>...</h1>
-			</footer>
-		</>
-	);
+  return (
+    <footer className="mt-auto bg-dark">
+      <div className="container py-3">
+        <small className="text-light">&copy; All rights reserved.</small>
+      </div>
+    </footer>
+  );
 }
 
 export default Footer;
