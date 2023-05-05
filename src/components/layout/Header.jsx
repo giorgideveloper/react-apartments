@@ -1,15 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { BsBuildingFillAdd } from "react-icons/bs";
+import { Link, useLocation } from "react-router-dom";
+import { BsBuildingFillAdd, BsFillPersonFill } from "react-icons/bs";
 
 function Header() {
+  const { pathname } = useLocation();
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            {" "}
-            Navbar
+            Apartments
           </Link>
 
           <button
@@ -26,17 +27,36 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" to="/">
-                  {" "}
+                <Link
+                  className={`nav-link ${pathname === "/" ? "active" : ""}`}
+                  to="/"
+                >
                   Home
                 </Link>
               </li>
             </ul>
-            <li className="nav-item">
-              <Link className=" btn btn-success" to="apartments/create">
-                <BsBuildingFillAdd /> Add apartment
-              </Link>
-            </li>
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
+              <li className="nav-item">
+                <Link
+                  className={`btn btn-success ${
+                    pathname === "/apartments/create" ? "btn-warning" : ""
+                  }`}
+                  to="apartments/create"
+                >
+                  <BsBuildingFillAdd /> Add apartment
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className={`btn btn-info ${
+                    pathname === "/login" ? "btn-warning" : ""
+                  }`}
+                  to="login"
+                >
+                  <BsFillPersonFill /> Login
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
