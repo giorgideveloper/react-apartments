@@ -17,18 +17,26 @@ const instance = axios.create({
  */
 export const setToken = (token) => {
   instance.defaults.withCredentials = true;
-  instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  instance.defaults.headers.common["Authorization"] = `Token ${token}`;
 };
 
 // Auth endpoints
 const auth = "/auth";
-export const login = (data) => instance.post(`${auth}/login/`, data);
+export const login = (data) => {
+  instance.defaults.baseURL = "https://api.geoevents.ge";
+
+  return instance.post(`${auth}/token/login/`, data);
+};
 export const logout = () => instance.post(`${auth}/logout/`);
 export const register = (data) => instance.post(`${auth}/registration/`, data);
 export const user = () => instance.get(`${auth}/user/`);
 
 // Apartments endpoints
-export const getApartments = () => instance.get("/apartments");
+export const getApartments = () => {
+  instance.defaults.baseURL = "https://api.geoevents.ge/api";
+
+  return instance.get("/apartments");
+};
 export const getApartmentById = (id) => instance.get(`/apartments/${id}`);
 export const addApartment = (data) => instance.post("/apartments", data);
 export const deleteApartment = (id) => instance.delete(`/apartments/${id}`);
