@@ -15,9 +15,9 @@ function LoginForm() {
       .min(4, "Minimum 4 symbols required.")
       .max(20, "Maximum 20 symbols allowed.")
       .required("Username is required."),
-    email: Yup.string()
-      .email("Invalid email format.")
-      .required("Email is required."),
+    // email: Yup.string()
+    //   .email("Invalid email format.")
+    //   .required("Email is required."),
     password: Yup.string()
       .min(8, "Minimum 8 symbols required.")
       .max(20, "Maximum 20 symbols allowed.")
@@ -33,10 +33,9 @@ function LoginForm() {
     try {
       setLoading(true); // Show spinner
       const loginRes = await login(credentials); // Login user
-      // localStorage.setItem("token", loginRes.data.key); // TODO: Set token in storage
-      setToken(loginRes.data.key); // Set token for axios instance
-      const userRes = await user(); // Get user data
-      console.log(userRes.data); // Log user data
+      const token = loginRes.data.auth_token; // Define token variable
+      localStorage.setItem("token", token); // Set token in storage
+      setToken(token); // Set token for axios instance
       setLoading(false); // Hide spinner
       toast("success", "Successfully authenticated. Redirecting..."); // Show success message
       setTimeout(() => navigate("/"), 2000); // Redirect to home page after 2 seconds
@@ -85,7 +84,7 @@ function LoginForm() {
                     </div>
                   ) : null}
                 </div>
-                <div className="mb-3">
+                {/* <div className="mb-3">
                   <label htmlFor="email" className="form-label">
                     Email address
                   </label>
@@ -103,7 +102,7 @@ function LoginForm() {
                       <small>{errors.email}</small>
                     </div>
                   ) : null}
-                </div>
+                </div> */}
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label">
                     Password
