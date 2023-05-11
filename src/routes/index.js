@@ -6,20 +6,43 @@ import AddPage from "../pages/AddPage";
 import NotfoundPage from "../pages/NotfoundPage";
 import LoginPage from "../pages/auth/LoginPage";
 import AuthGuard from "../components/auth/guards/AuthGuard";
+import LoginGate from "../components/auth/guards/LoginGate";
 
 export const Router = () => (
   <>
     <Routes>
-      <Route path="/" element={<AuthGuard component={Homepage} />} />
+      <Route
+        path="/"
+        element={
+          <AuthGuard>
+            <Homepage />
+          </AuthGuard>
+        }
+      />
       <Route
         path="/apartments/:id"
-        element={<AuthGuard component={PostPage} />}
+        element={
+          <AuthGuard>
+            <PostPage />
+          </AuthGuard>
+        }
       />
       <Route
         path="/apartments/create"
-        element={<AuthGuard component={AddPage} />}
+        element={
+          <AuthGuard>
+            <AddPage />
+          </AuthGuard>
+        }
       />
-      <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/login"
+        element={
+          <LoginGate>
+            <LoginPage />
+          </LoginGate>
+        }
+      />
       <Route path="*" element={<NotfoundPage />} />
     </Routes>
   </>
