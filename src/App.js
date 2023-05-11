@@ -13,7 +13,10 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (
+      localStorage.getItem("token") &&
+      moment(localStorage.getItem("expires")).isAfter(moment())
+    ) {
       dispatch(
         loginState({
           access: localStorage.getItem("token"),
@@ -24,7 +27,10 @@ function App() {
     }
 
     const interval = setInterval(async () => {
-      if (moment(localStorage.getItem("expires")).isBefore(moment())) {
+      if (
+        localStorage.getItem("refresh") &&
+        moment(localStorage.getItem("expires")).isBefore(moment())
+      ) {
         try {
           const refreshRes = await refresh(localStorage.getItem("refresh"));
           dispatch(
