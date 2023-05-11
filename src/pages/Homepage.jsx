@@ -1,8 +1,8 @@
 import React from "react";
 import GetApartments from "../components/GetApartments";
 
-function HomePage() {
+function Homepage() {
   return <GetApartments />;
 }
 
-export default HomePage;
+export default Homepage;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "../pages/HomePage";
+import Homepage from "../pages/Homepage";
 import PostPage from "../pages/PostPage";
 import AddPage from "../pages/AddPage";
 import NotfoundPage from "../pages/NotfoundPage";
@@ -10,7 +10,7 @@ import AuthGuard from "../components/auth/guards/AuthGuard";
 export const Router = () => (
   <>
     <Routes>
-      <Route path="/" element={<AuthGuard component={HomePage} />} />
+      <Route path="/" element={<AuthGuard component={Homepage} />} />
       <Route
         path="/apartments/:id"
         element={<AuthGuard component={PostPage} />}
