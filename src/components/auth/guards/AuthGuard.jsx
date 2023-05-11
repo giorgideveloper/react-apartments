@@ -1,19 +1,14 @@
-import { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-const AuthGuard = ({ component: Component }) => {
+const AuthGuard = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-  }, [isAuthenticated, navigate]);
 
   if (isAuthenticated) {
-    return <Component />;
+    return children;
+  } else {
+    return <Navigate to="/login" replace />;
   }
 };
 
