@@ -2,24 +2,24 @@ import { Formik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "../../helpers/toast";
-import { login, setToken, user } from "../../services/ApiService";
+import { login } from "../../services/ApiService";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { loginState } from "../../store/authSlice";
 
 function LoginForm() {
   const navigate = useNavigate(); // Get navigate from react router
   const [loading, setLoading] = useState(false); // Define loading
+  const dispatch = useDispatch();
 
   // Form validation with yup
   const loginSchema = Yup.object().shape({
     username: Yup.string()
-      .min(4, "Minimum 4 symbols required.")
+      .min(3, "Minimum 3 symbols required.")
       .max(20, "Maximum 20 symbols allowed.")
       .required("Username is required."),
-    // email: Yup.string()
-    //   .email("Invalid email format.")
-    //   .required("Email is required."),
     password: Yup.string()
-      .min(8, "Minimum 8 symbols required.")
+      .min(3, "Minimum 3 symbols required.")
       .max(20, "Maximum 20 symbols allowed.")
       .required("Password is required."),
   });
@@ -33,9 +33,13 @@ function LoginForm() {
     try {
       setLoading(true); // Show spinner
       const loginRes = await login(credentials); // Login user
-      const token = loginRes.data.auth_token; // Define token variable
-      localStorage.setItem("token", token); // Set token in storage
-      setToken(token); // Set token for axios instance
+      dispatch(
+        loginState({
+          access: loginRes.data.access,
+          refresh: loginRes.data.refresh,
+          time: true,
+        })
+      ); // Dispatch auth event
       setLoading(false); // Hide spinner
       toast("success", "Successfully authenticated. Redirecting..."); // Show success message
       setTimeout(() => navigate("/"), 2000); // Redirect to home page after 2 seconds
@@ -84,25 +88,6 @@ function LoginForm() {
                     </div>
                   ) : null}
                 </div>
-                {/* <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email address
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    id="email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                  />
-                  {errors.email && touched.email ? (
-                    <div className="text-danger">
-                      <small>{errors.email}</small>
-                    </div>
-                  ) : null}
-                </div> */}
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label">
                     Password
@@ -147,9 +132,8 @@ function LoginForm() {
                     className="btn btn-link text-decoration-none px-0"
                     onClick={(e) => {
                       e.preventDefault();
-                      values.username = "user";
-                      values.email = "mail@mail.ru";
-                      values.password = "Paroli12345";
+                      values.username = "admin";
+                      values.password = "123";
                       handleSubmit();
                     }}
                   >

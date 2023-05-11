@@ -3,15 +3,47 @@ import { Router } from "./routes";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import { useEffect } from "react";
-import { setToken } from "./services/ApiService";
+import { useDispatch } from "react-redux";
+import { loginState, logoutState } from "./store/authSlice";
+import moment from "moment";
+import { refresh } from "./services/ApiService";
+import toast from "./helpers/toast";
 
 function App() {
-  const setTokenGrobally = () =>
-    localStorage.token ? setToken(localStorage.getItem("token")) : null;
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    // setTokenGrobally(); // TODO: get token from localStorage and set for axios instance
-  }, []);
+    if (localStorage.getItem("token")) {
+      dispatch(
+        loginState({
+          access: localStorage.getItem("token"),
+          refresh: localStorage.getItem("refresh"),
+          time: false,
+        })
+      );
+    }
+
+    const interval = setInterval(async () => {
+      if (moment(localStorage.getItem("expires")).isBefore(moment())) {
+        try {
+          const refreshRes = await refresh(localStorage.getItem("refresh"));
+          dispatch(
+            loginState({
+              access: refreshRes.data.access,
+              refresh: localStorage.getItem("refresh"),
+              time: true,
+            })
+          );
+        } catch (error) {
+          console.log(error);
+          toast("warning", "Your session expired.");
+          dispatch(logoutState());
+        }
+      }
+    }, 1800000);
+
+    return () => clearInterval(interval);
+  }, [dispatch]);
 
   return (
     <>

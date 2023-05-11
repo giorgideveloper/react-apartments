@@ -12,7 +12,7 @@ function GetApartments() {
   const getAllApartments = async () => {
     try {
       const res = await getApartments();
-      setApartments(res.data);
+      setApartments(res.data.results);
     } catch (error) {
       console.log(error);
     }

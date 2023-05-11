@@ -1,9 +1,21 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { BsBuildingFillAdd, BsFillPersonFill } from "react-icons/bs";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { BsBuildingFillAdd, BsPower } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutState } from "../../store/authSlice";
+import toast from "../../helpers/toast";
 
 function Header() {
   const { pathname } = useLocation();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logoutState());
+    toast("success", "Logged out");
+    navigate("/login");
+  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary py-3 shadow-sm">
@@ -35,26 +47,27 @@ function Header() {
             </li>
           </ul>
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
-            <li className="nav-item">
-              <Link
-                className={`btn btn-success ${
-                  pathname === "/apartments/create" ? "btn-warning" : ""
-                }`}
-                to="apartments/create"
-              >
-                <BsBuildingFillAdd /> Add apartment
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className={`btn btn-info ${
-                  pathname === "/login" ? "btn-warning" : ""
-                }`}
-                to="login"
-              >
-                <BsFillPersonFill /> Login
-              </Link>
-            </li>
+            {isAuthenticated ? (
+              <>
+                <li className="nav-item">
+                  <Link
+                    className={`btn btn-success ${
+                      pathname === "/apartments/create" ? "btn-warning" : ""
+                    }`}
+                    to="apartments/create"
+                  >
+                    <BsBuildingFillAdd /> Add apartment
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <button className="btn btn-danger" onClick={handleLogout}>
+                    <BsPower /> Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              ""
+            )}
           </ul>
         </div>
       </div>
