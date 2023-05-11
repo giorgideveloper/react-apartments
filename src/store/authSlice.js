@@ -12,7 +12,7 @@ export const authSlice = createSlice({
       localStorage.setItem("token", action.payload.access); // Set token in storage
       localStorage.setItem("refresh", action.payload.refresh); // Set refresh in storage
       if (action.payload.time) {
-        localStorage.setItem("expires", moment().add(1, "minutes")); // Set token expire time in storage
+        localStorage.setItem("expires", moment().add(30, "minutes")); // Set token expire time in storage
       }
       setToken(action.payload.access);
       state.isAuthenticated = true;

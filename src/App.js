@@ -40,7 +40,7 @@ function App() {
           dispatch(logoutState());
         }
       }
-    }, 1800000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [dispatch]);
