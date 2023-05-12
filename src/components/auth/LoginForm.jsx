@@ -42,8 +42,8 @@ function LoginForm() {
         })
       ); // Dispatch auth event
       setLoading(false); // Hide spinner
-      toast("success", "Successfully authenticated. Redirecting..."); // Show success message
-      setTimeout(() => navigate("/"), 2000); // Redirect to home page after 2 seconds
+      toast("success", "Successfully logged in."); // Show success message
+      navigate("/"); // Redirect to home page
     } catch (error) {
       setLoading(false); // Hide spinner
       toast("error", "Oops, something went wrong!"); // Show error message

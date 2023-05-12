@@ -18,6 +18,7 @@ export const authSlice = createSlice({
         localStorage.setItem("expires", moment().add(30, "minutes"));
       setToken(action.payload.access);
       state.isAuthenticated = true;
+      state.user = action.payload.user;
     },
     logoutState: (state) => {
       localStorage.removeItem("token");
@@ -26,6 +27,7 @@ export const authSlice = createSlice({
       localStorage.removeItem("user");
       setToken();
       state.isAuthenticated = false;
+      state.user = null;
     },
   },
 });

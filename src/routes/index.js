@@ -7,6 +7,7 @@ import NotfoundPage from "../pages/NotfoundPage";
 import LoginPage from "../pages/auth/LoginPage";
 import AuthGuard from "../components/auth/guards/AuthGuard";
 import LoginGate from "../components/auth/guards/LoginGate";
+import ProfilePage from "../pages/auth/ProfilePage";
 
 export const Router = () => (
   <>
@@ -32,6 +33,14 @@ export const Router = () => (
         element={
           <AuthGuard>
             <AddPage />
+          </AuthGuard>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <AuthGuard>
+            <ProfilePage />
           </AuthGuard>
         }
       />
