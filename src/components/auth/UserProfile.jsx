@@ -5,22 +5,22 @@ function UserProfile() {
 
   return (
     <div className="col-12">
-      <div class="card shadow-sm mb-3">
+      <div className="card shadow-sm mb-3">
         <div className="card-header">
           <h2>👋 Hey there</h2>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">I am {user?.user} 😎</h5>
+        <div className="card-body">
+          <h5 className="card-title">I am {user?.user} 😎</h5>
           <strong>Bio:</strong>
-          <p class="card-text">
+          <p className="card-text">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae
             dolorem a enim eaque, odit iure repellendus ducimus architecto
             quaerat vero impedit maiores esse quia, ea saepe placeat, molestias
             facilis molestiae!
           </p>
           {user?.email ? (
-            <p class="card-text">
-              <small class="text-body-secondary">
+            <p className="card-text">
+              <small className="text-body-secondary">
                 This is my email: {user?.email}
               </small>
             </p>
