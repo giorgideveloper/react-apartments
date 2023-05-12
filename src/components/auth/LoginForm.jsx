@@ -35,14 +35,15 @@ function LoginForm() {
       const loginRes = await login(credentials); // Login user
       dispatch(
         loginState({
-          access: loginRes.data.access,
-          refresh: loginRes.data.refresh,
+          access: loginRes.data.data.access,
+          refresh: loginRes.data.data.refresh,
+          user: loginRes.data.user_info,
           time: true,
         })
       ); // Dispatch auth event
       setLoading(false); // Hide spinner
-      toast("success", "Successfully authenticated. Redirecting..."); // Show success message
-      setTimeout(() => navigate("/"), 2000); // Redirect to home page after 2 seconds
+      toast("success", "Successfully logged in."); // Show success message
+      navigate("/"); // Redirect to home page
     } catch (error) {
       setLoading(false); // Hide spinner
       toast("error", "Oops, something went wrong!"); // Show error message

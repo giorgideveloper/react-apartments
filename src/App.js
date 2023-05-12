@@ -21,6 +21,7 @@ function App() {
         loginState({
           access: localStorage.getItem("token"),
           refresh: localStorage.getItem("refresh"),
+          user: JSON.parse(localStorage.getItem("user")),
           time: false,
         })
       );
@@ -37,6 +38,7 @@ function App() {
             loginState({
               access: refreshRes.data.access,
               refresh: localStorage.getItem("refresh"),
+              user: JSON.parse(localStorage.getItem("user")),
               time: true,
             })
           );
