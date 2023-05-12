@@ -35,8 +35,9 @@ function LoginForm() {
       const loginRes = await login(credentials); // Login user
       dispatch(
         loginState({
-          access: loginRes.data.access,
-          refresh: loginRes.data.refresh,
+          access: loginRes.data.data.access,
+          refresh: loginRes.data.data.refresh,
+          user: loginRes.data.user_info,
           time: true,
         })
       ); // Dispatch auth event
