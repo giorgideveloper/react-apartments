@@ -6,41 +6,36 @@ import { HiLocationMarker } from 'react-icons/hi';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { MdFavoriteBorder } from 'react-icons/md';
 import toast from '../helpers/toast';
-import { addToApartment } from '../store/apartmentSlice';
+import {
+	addToApartment,
+	deleteApartments,
+	getAllApartments,
+} from '../store/apartmentSlice';
+import { useSelector } from 'react-redux';
 
 function GetApartments() {
 	const dispatch = useDispatch();
 
-	const [apartments, setApartments] = useState();
+	const apartments = useSelector(state => state.apartment.apartment);
 
-	// Get all Apartments
-	const getAllApartments = async () => {
-		try {
-			const res = await getApartments();
-			setApartments(res.data.results);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	const deleteApartments = async id => {
-		try {
-			const res = await deleteApartment(id);
-			console.log(res, 'deleted successfully!');
-			toast('success', 'Apartment deleted successfully!');
-			getAllApartments();
-		} catch (error) {
-			console.log(error);
-			toast('error', 'Apartment could not be deleted');
-		}
-	};
+	console.log(apartments);
+	// const deleteApartments = async id => {
+	// 	try {
+	// 		const res = await deleteApartment(id);
+	// 		console.log(res, 'deleted successfully!');
+	// 		toast('success', 'Apartment deleted successfully!');
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 		toast('error', 'Apartment could not be deleted');
+	// 	}
+	// };
 	const handleAddFavorite = apartment => {
 		dispatch(addToApartment(apartment));
 	};
 
 	useEffect(() => {
 		getAllApartments();
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<>
@@ -82,7 +77,7 @@ function GetApartments() {
 											<RiDeleteBin2Fill
 												className='fs-4 text-danger'
 												role='button'
-												onClick={() => deleteApartments(apartment.id)}
+												onClick={() => dispatch(deleteApartments(apartment.id))}
 											/>
 										</div>
 									</div>

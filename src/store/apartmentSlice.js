@@ -1,17 +1,55 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import toast from '../helpers/toast';
+import { getApartments } from '../services/ApiService';
+import { deleteApartment } from '../services/ApiService';
 
 const initialState = {
-	apartment: localStorage.getItem('apartment')
-		? JSON.parse(localStorage.getItem('apartment'))
-		: [],
+	apartment: [],
 	apartmentQuantity: 0,
 	apartmentAmount: 0,
 };
+//Get all apartments
+export const getAllApartments = createAsyncThunk(
+	'apartment/getApartmentsRedux',
+	async () => {
+		const response = await getApartments();
+		console.log(response.data.results);
+		return response.data;
+	}
+);
+// Delete apartments by id
+export const deleteApartments = createAsyncThunk(
+	'deleteApartment/deleteApartmentRedux',
+	async id => {
+		try {
+			const res = await deleteApartment(id);
+			console.log(res, 'deleted successfully!');
+			toast('success', 'Apartment deleted successfully!');
+		} catch (error) {
+			console.log(error);
+			toast('error', 'Apartment could not be deleted');
+		}
+	}
+);
 
 const apartmentSlice = createSlice({
 	name: 'apartment',
 	initialState,
+	extraReducers(builder) {
+		// trending movies
+		builder
+			.addCase(getAllApartments.pending, (state, action) => {
+				state.status = 'pending';
+			})
+			.addCase(getAllApartments.fulfilled, (state, action) => {
+				state.status = 'fulfilled';
+				state.apartment = state.apartment.concat(action.payload);
+			})
+			.addCase(getAllApartments.rejected, (state, action) => {
+				state.status = 'rejected';
+				state.error = action.error.message;
+			});
+	},
 	reducers: {
 		addToApartment(state, action) {
 			const itemIndex = state.apartment.findIndex(
