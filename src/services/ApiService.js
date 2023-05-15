@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const baseUrl = process.env.REACT_APP_APARTMENTS_BASE_URL || "";
+
 // Axios instance
 const instance = axios.create({
-  baseURL: "https://api.geoevents.ge/api",
+  baseURL: baseUrl,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

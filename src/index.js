@@ -6,8 +6,10 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import * as Sentry from "@sentry/react";
 
+const sentryDsn = process.env.REACT_APP_SENTRY_DSN || "";
+
 Sentry.init({
-  dsn: "https://5d6600021f4843f594cf0284a71915e0@o4505167174696960.ingest.sentry.io/4505167175811072",
+  dsn: sentryDsn,
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   // Performance Monitoring
   tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
