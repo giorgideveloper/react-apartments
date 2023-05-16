@@ -1,62 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { HiLocationMarker } from 'react-icons/hi';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { MdFavoriteBorder } from 'react-icons/md';
-import { deleteApartments, getAllApartments } from '../store/apartmentSlice';
+
 import { setLoading } from '../store/loadingSlice';
-import { deleteApartment, getApartments } from '../services/ApiService';
-import toast from '../helpers/toast';
+import { deleteApartments } from '../store/contentSlice';
+import { fetchContent } from '../store/contentSlice';
 
 function GetApartments() {
-	const [apartments, setApartments] = useState();
 	const dispatch = useDispatch();
 
-	// Get all Apartments
-	const getAllApartments = async () => {
-		try {
-			dispatch(setLoading(true));
-			const res = await getApartments();
-			setApartments(res.data.results);
-			dispatch(setLoading(false));
-		} catch (error) {
-			dispatch(setLoading(false));
-			console.log(error);
-		}
-	};
-
-	const deleteApartments = async id => {
-		try {
-			dispatch(setLoading(true));
-			await deleteApartment(id);
-			toast('success', 'Apartment deleted successfully!');
-			getAllApartments();
-			dispatch(setLoading(false));
-		} catch (error) {
-			dispatch(setLoading(false));
-			console.log(error);
-			toast('error', 'Apartment could not be deleted');
-		}
-	};
-
 	useEffect(() => {
-		getAllApartments();
+		dispatch(fetchContent());
 	}, [dispatch]);
+
+	const apartments = useSelector(state => state.content.contents);
+	const isLoading = useSelector(state => state.content.isLoading);
+	const error = useSelector(state => state.content.error);
+
+	if (isLoading) {
+		return 'loading...';
+	}
+
+	if (error) {
+		return error;
+	}
+
+	console.log(apartments.results);
 
 	return (
 		<>
 			{' '}
 			<div className='container'>
 				<div className='row pt-4'>
-					{apartments?.map(apartment => (
+					{apartments.results?.map(apartment => (
 						<div className='col-md-4 col-12 pt-4' key={apartment.id}>
 							<div className='card ' style={{ width: '100%' }}>
-								<img
-									src={apartment.image1}
-									className='card-img-top'
-									alt='...'
-								/>
+								<img src={apartment.title} className='card-img-top' alt='...' />
 								<div className='card-body '>
 									<h6 className='card-title'>ბინა ბათუმში</h6>
 									<p className='card-text'>

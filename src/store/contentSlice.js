@@ -1,7 +1,8 @@
 // contentSlice.js
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { deleteApartment, getApartments } from '../services/ApiService';
+import toast from '../helpers/toast';
 
 const initialState = {
 	contents: [],
@@ -12,9 +13,23 @@ const initialState = {
 export const fetchContent = createAsyncThunk(
 	'content/fetchContent',
 	async () => {
-		const res = await axios('https://jsonplaceholder.typicode.com/posts');
+		const res = await getApartments();
 		const data = await res.data;
 		return data;
+	}
+);
+
+export const deleteApartments = createAsyncThunk(
+	'delete/deleteApartments',
+	async id => {
+		try {
+			await deleteApartment(id);
+			toast('success', 'Apartment deleted successfully!');
+			fetchContent();
+		} catch (error) {
+			console.log(error);
+			toast('error', 'Apartment could not be deleted');
+		}
 	}
 );
 
