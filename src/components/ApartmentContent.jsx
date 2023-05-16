@@ -4,17 +4,24 @@ import { getApartmentById } from "../services/ApiService";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { MdOutlineBedroomParent } from "react-icons/md";
 import { Gi3DStairs } from "react-icons/gi";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../store/loadingSlice";
 
 function ApartmentContent() {
   let { id } = useParams();
   const [post, setPost] = useState("");
   const [categoryType, setCategoryType] = useState("");
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.loading.loading);
 
   const getPost = async () => {
     try {
+      dispatch(setLoading(true));
       const res = await getApartmentById(id);
       setPost(res.data);
+      dispatch(setLoading(false));
     } catch (error) {
+      dispatch(setLoading(false));
       console.log(error);
     }
   };
@@ -45,6 +52,8 @@ function ApartmentContent() {
   useEffect(() => {
     typeSettings();
   });
+
+  if (loading) return;
 
   return (
     <>

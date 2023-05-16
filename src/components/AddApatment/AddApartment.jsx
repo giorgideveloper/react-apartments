@@ -5,11 +5,15 @@ import cityData from "../cityData/cityData.json";
 import { useNavigate } from "react-router";
 import { addApartment } from "../../services/ApiService";
 import toast from "../../helpers/toast";
+import { useDispatch } from "react-redux";
+import { setLoading } from "../../store/loadingSlice";
 
 function AddApartment() {
   const navigate = useNavigate();
   //  int ref
   const ceilingRef = useRef(null);
+  const dispatch = useDispatch();
+
   //checkbox
   const [checkboxes, setCheckboxes] = useState([
     { label: "კონდიციონერი", checked: false },
@@ -71,11 +75,13 @@ function AddApartment() {
 
   const postData = async () => {
     try {
+      dispatch(setLoading(true));
       const res = await addApartment(post);
-      console.log(res);
+      dispatch(setLoading(false));
       toast("success", "Apartment added successfully");
       setTimeout(() => navigate("/", { replace: true }), 2000);
     } catch (error) {
+      dispatch(setLoading(false));
       console.log(error);
       toast(
         "warning",

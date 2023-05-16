@@ -8,6 +8,8 @@ import { loginState, logoutState } from "./store/authSlice";
 import moment from "moment";
 import { refresh } from "./services/ApiService";
 import toast from "./helpers/toast";
+import Loading from "./components/partials/Loading";
+import { setLoading } from "./store/loadingSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +35,7 @@ function App() {
         moment(localStorage.getItem("expires")).isBefore(moment())
       ) {
         try {
+          dispatch(setLoading(true));
           const refreshRes = await refresh(localStorage.getItem("refresh"));
           dispatch(
             loginState({
@@ -42,7 +45,9 @@ function App() {
               time: true,
             })
           );
+          dispatch(setLoading(false));
         } catch (error) {
+          dispatch(setLoading(false));
           console.log(error);
           toast("warning", "Your session expired.");
           dispatch(logoutState());
@@ -57,6 +62,7 @@ function App() {
     <>
       <Header />
       <Router />
+      <Loading />
       <Footer />
     </>
   );
