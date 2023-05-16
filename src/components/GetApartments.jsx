@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { getApartments, deleteApartment } from '../services/ApiService';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { HiLocationMarker } from 'react-icons/hi';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { MdFavoriteBorder } from 'react-icons/md';
-import toast from '../helpers/toast';
-import {
-	addToApartment,
-	deleteApartments,
-	getAllApartments,
-} from '../store/apartmentSlice';
+import { deleteApartments, getAllApartments } from '../store/apartmentSlice';
 import { useSelector } from 'react-redux';
 
 function GetApartments() {
 	const dispatch = useDispatch();
 
-	const apartments = useSelector(state => state.apartment.apartment);
+	const apartments = useSelector(state => state.apartment.apartments);
 
 	console.log(apartments);
 	// const deleteApartments = async id => {
@@ -29,9 +23,6 @@ function GetApartments() {
 	// 		toast('error', 'Apartment could not be deleted');
 	// 	}
 	// };
-	const handleAddFavorite = apartment => {
-		dispatch(addToApartment(apartment));
-	};
 
 	useEffect(() => {
 		getAllApartments();
@@ -72,7 +63,6 @@ function GetApartments() {
 											<MdFavoriteBorder
 												className='fs-5 mr-auto me-3'
 												role='button'
-												onClick={() => handleAddFavorite(apartment)}
 											/>
 											<RiDeleteBin2Fill
 												className='fs-4 text-danger'

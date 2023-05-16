@@ -1,65 +1,66 @@
-import "./assets/css/style.css";
-import { Router } from "./routes";
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { loginState, logoutState } from "./store/authSlice";
-import moment from "moment";
-import { refresh } from "./services/ApiService";
-import toast from "./helpers/toast";
+import './assets/css/style.css';
+import { Router } from './routes';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginState, logoutState } from './store/authSlice';
+import moment from 'moment';
+import { refresh } from './services/ApiService';
+import toast from './helpers/toast';
 
 function App() {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (
-      localStorage.getItem("token") &&
-      moment(localStorage.getItem("expires")).isAfter(moment())
-    ) {
-      dispatch(
-        loginState({
-          access: localStorage.getItem("token"),
-          refresh: localStorage.getItem("refresh"),
-          user: JSON.parse(localStorage.getItem("user")),
-          time: false,
-        })
-      );
-    }
+	useEffect(() => {
+		if (
+			localStorage.getItem('token') &&
+			moment(localStorage.getItem('expires')).isAfter(moment())
+		) {
+			dispatch(
+				loginState({
+					access: localStorage.getItem('token'),
+					refresh: localStorage.getItem('refresh'),
+					user: JSON.parse(localStorage.getItem('user')),
+					time: false,
+				})
+			);
+		}
 
-    const interval = setInterval(async () => {
-      if (
-        localStorage.getItem("refresh") &&
-        moment(localStorage.getItem("expires")).isBefore(moment())
-      ) {
-        try {
-          const refreshRes = await refresh(localStorage.getItem("refresh"));
-          dispatch(
-            loginState({
-              access: refreshRes.data.access,
-              refresh: localStorage.getItem("refresh"),
-              user: JSON.parse(localStorage.getItem("user")),
-              time: true,
-            })
-          );
-        } catch (error) {
-          console.log(error);
-          toast("warning", "Your session expired.");
-          dispatch(logoutState());
-        }
-      }
-    }, 1000);
+		const interval = setInterval(async () => {
+			if (
+				localStorage.getItem('refresh') &&
+				moment(localStorage.getItem('expires')).isBefore(moment())
+			) {
+				try {
+					const refreshRes = await refresh(localStorage.getItem('refresh'));
+					dispatch(
+						loginState({
+							access: refreshRes.data.access,
+							refresh: localStorage.getItem('refresh'),
+							user: JSON.parse(localStorage.getItem('user')),
+							time: true,
+						})
+					);
+				} catch (error) {
+					console.log(error);
+					toast('warning', 'Your session expired.');
+					dispatch(logoutState());
+				}
+			}
+		}, 1000);
 
-    return () => clearInterval(interval);
-  }, [dispatch]);
+		return () => clearInterval(interval);
+	}, [dispatch]);
 
-  return (
-    <>
-      <Header />
-      <Router />
-      <Footer />
-    </>
-  );
+	return (
+		<>
+			<Header />
+			<Router />
+
+			<Footer />
+		</>
+	);
 }
 
 export default App;

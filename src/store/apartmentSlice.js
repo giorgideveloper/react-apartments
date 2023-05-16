@@ -2,24 +2,26 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import toast from '../helpers/toast';
 import { getApartments } from '../services/ApiService';
 import { deleteApartment } from '../services/ApiService';
+import axios from 'axios';
 
 const initialState = {
-	apartment: [],
-	apartmentQuantity: 0,
-	apartmentAmount: 0,
+	apartments: [],
+	isLoading: false,
+	error: null,
 };
 //Get all apartments
 export const getAllApartments = createAsyncThunk(
-	'apartment/getApartmentsRedux',
+	'apartment/getAllApartments',
 	async () => {
-		const response = await getApartments();
-		console.log(response.data.results);
-		return response.data;
+		const res = await axios('https://jsonplaceholder.typicode.com/posts');
+		const data = await res.data;
+		console.log(data);
+		return data;
 	}
 );
 // Delete apartments by id
 export const deleteApartments = createAsyncThunk(
-	'deleteApartment/deleteApartmentRedux',
+	'deleteApartment/deleteApartment',
 	async id => {
 		try {
 			const res = await deleteApartment(id);
@@ -32,42 +34,23 @@ export const deleteApartments = createAsyncThunk(
 	}
 );
 
-const apartmentSlice = createSlice({
+export const apartmentSlice = createSlice({
 	name: 'apartment',
 	initialState,
-	extraReducers(builder) {
-		// trending movies
-		builder
-			.addCase(getAllApartments.pending, (state, action) => {
-				state.status = 'pending';
-			})
-			.addCase(getAllApartments.fulfilled, (state, action) => {
-				state.status = 'fulfilled';
-				state.apartment = state.apartment.concat(action.payload);
-			})
-			.addCase(getAllApartments.rejected, (state, action) => {
-				state.status = 'rejected';
-				state.error = action.error.message;
-			});
-	},
-	reducers: {
-		addToApartment(state, action) {
-			const itemIndex = state.apartment.findIndex(
-				item => item.id === action.payload.id
-			);
-			if (itemIndex >= 0) {
-				state.apartment[itemIndex].apartmentQuantity += 1;
-				toast('info', 'increased apartment quantity');
-			} else {
-				const tempApartments = { ...action.payload, apartmentQuantity: 1 };
-				state.apartment.push(tempApartments);
-				toast('success', ` added a new apartment to favorite`);
-			}
-
-			localStorage.setItem('apartment', JSON.stringify(state.apartment));
-		},
+	reducers: {},
+	extraReducers: builder => {
+		builder.addCase(getAllApartments.pending, state => {
+			state.isLoading = true;
+		});
+		builder.addCase(getAllApartments.fulfilled, (state, action) => {
+			state.isLoading = false;
+			state.contents = action.payload;
+		});
+		builder.addCase(getAllApartments.rejected, (state, action) => {
+			state.isLoading = false;
+			state.error = action.error.message;
+		});
 	},
 });
 
-export const { addToApartment } = apartmentSlice.actions;
 export default apartmentSlice.reducer;
