@@ -1,28 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { HiLocationMarker } from 'react-icons/hi';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { MdFavoriteBorder } from 'react-icons/md';
 import { deleteApartments, getAllApartments } from '../store/apartmentSlice';
-import { useSelector } from 'react-redux';
+import { setLoading } from '../store/loadingSlice';
+import { deleteApartment, getApartments } from '../services/ApiService';
+import toast from '../helpers/toast';
 
 function GetApartments() {
+	const [apartments, setApartments] = useState();
 	const dispatch = useDispatch();
 
-	const apartments = useSelector(state => state.apartment.apartments);
+	// Get all Apartments
+	const getAllApartments = async () => {
+		try {
+			dispatch(setLoading(true));
+			const res = await getApartments();
+			setApartments(res.data.results);
+			dispatch(setLoading(false));
+		} catch (error) {
+			dispatch(setLoading(false));
+			console.log(error);
+		}
+	};
 
-	console.log(apartments);
-	// const deleteApartments = async id => {
-	// 	try {
-	// 		const res = await deleteApartment(id);
-	// 		console.log(res, 'deleted successfully!');
-	// 		toast('success', 'Apartment deleted successfully!');
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 		toast('error', 'Apartment could not be deleted');
-	// 	}
-	// };
+	const deleteApartments = async id => {
+		try {
+			dispatch(setLoading(true));
+			await deleteApartment(id);
+			toast('success', 'Apartment deleted successfully!');
+			getAllApartments();
+			dispatch(setLoading(false));
+		} catch (error) {
+			dispatch(setLoading(false));
+			console.log(error);
+			toast('error', 'Apartment could not be deleted');
+		}
+	};
 
 	useEffect(() => {
 		getAllApartments();
