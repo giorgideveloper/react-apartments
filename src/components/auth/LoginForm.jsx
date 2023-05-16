@@ -1,15 +1,14 @@
 import { Formik } from "formik";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "../../helpers/toast";
 import { login } from "../../services/ApiService";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { loginState } from "../../store/authSlice";
+import { setLoading } from "../../store/loadingSlice";
 
 function LoginForm() {
   const navigate = useNavigate(); // Get navigate from react router
-  const [loading, setLoading] = useState(false); // Define loading
   const dispatch = useDispatch();
 
   // Form validation with yup
@@ -31,7 +30,7 @@ function LoginForm() {
    */
   const authenticate = async (credentials) => {
     try {
-      setLoading(true); // Show spinner
+      dispatch(setLoading(true)); // Show spinner
       const loginRes = await login(credentials); // Login user
       dispatch(
         loginState({
@@ -41,11 +40,11 @@ function LoginForm() {
           time: true,
         })
       ); // Dispatch auth event
-      setLoading(false); // Hide spinner
+      dispatch(setLoading(false)); // Hide spinner
       toast("success", "Successfully logged in."); // Show success message
       navigate("/"); // Redirect to home page
     } catch (error) {
-      setLoading(false); // Hide spinner
+      dispatch(setLoading(false)); // Hide spinner
       toast("error", "Oops, something went wrong!"); // Show error message
     }
   };
@@ -108,21 +107,8 @@ function LoginForm() {
                     </div>
                   ) : null}
                 </div>
-                <button
-                  type="submit"
-                  className={`btn btn-primary ${loading ? "disabled" : ""}`}
-                >
+                <button type="submit" className="btn btn-primary">
                   Login
-                  {loading ? (
-                    <div
-                      className="spinner-border spinner-border-sm text-light ms-2"
-                      role="status"
-                    >
-                      <span className="visually-hidden">Loading...</span>
-                    </div>
-                  ) : (
-                    ""
-                  )}
                 </button>
                 <a href="#!" className="btn btn-link disabled">
                   Register
