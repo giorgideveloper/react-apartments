@@ -34,8 +34,7 @@ export const getApartmentById = id => instance.get(`/apartments/${id}`);
 export const addApartment = data => instance.post('/apartments', data);
 export const deleteApartment = id => instance.delete(`/apartments/${id}`);
 
-// Favorite endpoints
-export const getFavorites = () => instance.get('/favorites');
-export const getFavoriteById = id => instance.get(`/favorites/${id}`);
-export const addFavorite = data => instance.post('/favorites', data);
-export const deleteFavorite = id => instance.delete(`/favorites/${id}`);
+// Houses endpoints
+export const getHouses = () => instance.get('/houses');
+export const getHousesById = id => instance.get(`/houses/${id}`);
+export const deleteHouse = id => instance.delete(`/houses/${id}`);

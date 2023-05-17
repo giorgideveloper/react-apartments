@@ -1,24 +1,21 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchHouses } from '../store/housesSlice';
 import { HiLocationMarker } from 'react-icons/hi';
-import { RiDeleteBin2Fill } from 'react-icons/ri';
 import { MdFavoriteBorder } from 'react-icons/md';
+import { RiDeleteBin2Fill } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
-// import { setLoading } from '../store/loadingSlice';
-import { deleteApartments } from '../store/contentSlice';
-import { fetchContent } from '../store/contentSlice';
-
-function GetApartments() {
+function GetHouses() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(fetchContent());
+		dispatch(fetchHouses());
 	}, [dispatch]);
 
-	const apartments = useSelector(state => state.content.contents);
-	const isLoading = useSelector(state => state.content.isLoading);
-	const error = useSelector(state => state.content.error);
+	const houses = useSelector(state => state.house.houses);
+	const isLoading = useSelector(state => state.house.isLoading);
+	const error = useSelector(state => state.house.error);
 
 	if (isLoading) {
 		return 'loading...';
@@ -28,28 +25,26 @@ function GetApartments() {
 		return error;
 	}
 
+	console.log(houses);
 	return (
 		<>
-			{' '}
 			<div className='container'>
 				<div className='row pt-4'>
-					<h2>Apartment</h2>
-					{apartments.results?.map(apartment => (
-						<div className='col-md-4 col-12 pt-4' key={apartment.id}>
+					<h2>Houses</h2>
+					{houses.results?.map(house => (
+						<div className='col-md-4 col-12 pt-4' key={house.id}>
 							<div className='card ' style={{ width: '100%' }}>
-								<img src={apartment.title} className='card-img-top' alt='...' />
+								<img src={house.title} className='card-img-top' alt='...' />
 								<div className='card-body '>
-									<h6 className='card-title'>ბინა ბათუმში</h6>
-									<p className='card-text'>
-										{apartment.description.slice(0, 50)}
-									</p>
+									<h6 className='card-title'>სახლი ბათუმში</h6>
+									<p className='card-text'>{house.description.slice(0, 50)}</p>
 									<p className='card-text fs-6'>
 										<HiLocationMarker />
-										{apartment.address}
+										{house.address}
 									</p>
 									<div className='card-content w-100'>
 										<div className='card-buttons'>
-											<Link to={`/apartments/${apartment.id}`}>
+											<Link to={`/houses/${house.id}`}>
 												<button type='button' className='btn btn-secondary'>
 													Go somewhere
 												</button>
@@ -64,7 +59,7 @@ function GetApartments() {
 											<RiDeleteBin2Fill
 												className='fs-4 text-danger'
 												role='button'
-												onClick={() => dispatch(deleteApartments(apartment.id))}
+												// onClick={() => dispatch(deleteApartments(apartment.id))}
 											/>
 										</div>
 									</div>
@@ -78,4 +73,4 @@ function GetApartments() {
 	);
 }
 
-export default GetApartments;
+export default GetHouses;

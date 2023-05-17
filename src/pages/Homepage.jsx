@@ -1,8 +1,8 @@
-import React from "react";
-import GetApartments from "../components/GetApartments";
+import React from 'react';
+import GetApartments from '../components/GetApartments';
 
 function Homepage() {
-  return <GetApartments />;
+	return <GetApartments />;
 }
 
 export default Homepage;
