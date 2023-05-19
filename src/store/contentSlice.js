@@ -9,7 +9,7 @@ const initialState = {
 	isLoading: false,
 	error: null,
 };
-
+// Get Apartments
 export const fetchContent = createAsyncThunk(
 	'content/fetchContent',
 	async () => {
@@ -18,7 +18,7 @@ export const fetchContent = createAsyncThunk(
 		return data;
 	}
 );
-
+// Delete Apartments
 export const deleteApartments = createAsyncThunk(
 	'delete/deleteApartments',
 	async id => {
