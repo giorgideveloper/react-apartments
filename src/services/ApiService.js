@@ -25,6 +25,7 @@ export const setToken = (token) => {
 // Auth endpoints
 const jwt = "/token/";
 export const login = (data) => instance.post("login/", data);
+export const register = (data) => instance.post("registration/", data);
 export const refresh = (refresh) =>
   instance.post(`${jwt}refresh/`, { refresh });
 export const verify = (data) => instance.post(`${jwt}verify/`, data);
