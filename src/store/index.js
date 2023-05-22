@@ -3,6 +3,7 @@ import authReducer from './authSlice';
 import loadingReducer from './loadingSlice';
 import contentReducer from './contentSlice';
 import housesReducer from './housesSlice';
+import favoriteReducer from './favoriteSlice';
 
 export const store = configureStore({
 	reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
 		loading: loadingReducer,
 		content: contentReducer,
 		house: housesReducer,
+		favorite: favoriteReducer,
 	},
 });

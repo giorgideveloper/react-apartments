@@ -8,6 +8,7 @@ import { MdFavoriteBorder } from 'react-icons/md';
 // import { setLoading } from '../store/loadingSlice';
 import { deleteApartments } from '../store/contentSlice';
 import { fetchContent } from '../store/contentSlice';
+import { addFavorite } from '../store/favoriteSlice';
 
 function GetApartments() {
 	const dispatch = useDispatch();
@@ -27,6 +28,10 @@ function GetApartments() {
 	if (error) {
 		return error;
 	}
+
+	// const handleFavorite = () =>{
+	// 		;
+	// }
 
 	return (
 		<>
@@ -60,6 +65,7 @@ function GetApartments() {
 											<MdFavoriteBorder
 												className='fs-5 mr-auto me-3'
 												role='button'
+												onClick={() => dispatch(addFavorite(apartment))}
 											/>
 											<RiDeleteBin2Fill
 												className='fs-4 text-danger'

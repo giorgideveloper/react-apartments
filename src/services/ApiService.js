@@ -37,4 +37,5 @@ export const deleteApartment = id => instance.delete(`/apartments/${id}`);
 // Houses endpoints
 export const getHouses = () => instance.get('/houses');
 export const getHousesById = id => instance.get(`/houses/${id}`);
+export const AddHouse = data => instance.post(`/house/${data}`);
 export const deleteHouse = id => instance.delete(`/houses/${id}`);
