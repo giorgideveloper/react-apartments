@@ -5,6 +5,7 @@ import PostPage from "../pages/PostPage";
 import AddPage from "../pages/AddPage";
 import NotfoundPage from "../pages/NotfoundPage";
 import LoginPage from "../pages/auth/LoginPage";
+import RegistrationPage from "../pages/auth/RegistrationPage";
 import AuthGuard from "../components/auth/guards/AuthGuard";
 import LoginGate from "../components/auth/guards/LoginGate";
 import ProfilePage from "../pages/auth/ProfilePage";
@@ -49,6 +50,14 @@ export const Router = () => (
         element={
           <LoginGate>
             <LoginPage />
+          </LoginGate>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <LoginGate>
+            <RegistrationPage />
           </LoginGate>
         }
       />

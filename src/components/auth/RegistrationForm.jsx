@@ -1,13 +1,13 @@
 import { Formik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "../../helpers/toast";
-import { login } from "../../services/ApiService";
+import { register } from "../../services/ApiService";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { loginState } from "../../store/authSlice";
 import { setLoading } from "../../store/loadingSlice";
 
-function LoginForm() {
+function RegistrationForm() {
   const navigate = useNavigate(); // Get navigate from react router
   const dispatch = useDispatch();
 
@@ -17,6 +17,7 @@ function LoginForm() {
       .min(3, "Minimum 3 symbols required.")
       .max(20, "Maximum 20 symbols allowed.")
       .required("Username is required."),
+    email: Yup.string().email("Invalid email.").required("Email is required."),
     password: Yup.string()
       .min(3, "Minimum 3 symbols required.")
       .max(20, "Maximum 20 symbols allowed.")
@@ -31,17 +32,21 @@ function LoginForm() {
   const authenticate = async (credentials) => {
     try {
       dispatch(setLoading(true)); // Show spinner
-      const loginRes = await login(credentials); // Login user
+      const registerRes = await register(credentials); // Register user
       dispatch(
         loginState({
-          access: loginRes.data.data.access,
-          refresh: loginRes.data.data.refresh,
-          user: loginRes.data.user_info,
+          access: registerRes.data.access_data.access,
+          refresh: registerRes.data.access_data.refresh,
+          user: {
+            id: registerRes.data.user.id,
+            user: registerRes.data.user.username,
+            email: registerRes.data.user.email,
+          },
           time: true,
         })
       ); // Dispatch auth event
       dispatch(setLoading(false)); // Hide spinner
-      toast("success", "Successfully logged in."); // Show success message
+      toast("success", "Successfully registered."); // Show success message
       navigate("/"); // Redirect to home page
     } catch (error) {
       dispatch(setLoading(false)); // Hide spinner
@@ -54,7 +59,7 @@ function LoginForm() {
       <div className="row justify-content-center g-3">
         <div className="col-12 col-md-4 col-lg-3">
           <Formik
-            initialValues={{ username: "", password: "" }}
+            initialValues={{ username: "", email: "", password: "" }}
             validationSchema={loginSchema}
             onSubmit={(values) => {
               authenticate(values);
@@ -89,6 +94,25 @@ function LoginForm() {
                   ) : null}
                 </div>
                 <div className="mb-3">
+                  <label htmlFor="email" className="form-label">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    name="email"
+                    id="email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                  />
+                  {errors.email && touched.email ? (
+                    <div className="text-danger">
+                      <small>{errors.email}</small>
+                    </div>
+                  ) : null}
+                </div>
+                <div className="mb-3">
                   <label htmlFor="password" className="form-label">
                     Password
                   </label>
@@ -108,25 +132,11 @@ function LoginForm() {
                   ) : null}
                 </div>
                 <button type="submit" className="btn btn-primary">
-                  Login
-                </button>
-                <Link to="/register" className="btn btn-link">
                   Register
+                </button>
+                <Link to="/login" className="btn btn-link">
+                  Already registered?
                 </Link>
-                <div className="mt-2">
-                  <button
-                    type="button"
-                    className="btn btn-link text-decoration-none px-0"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      values.username = "admin";
-                      values.password = "123";
-                      handleSubmit();
-                    }}
-                  >
-                    Login with demo user
-                  </button>
-                </div>
               </form>
             )}
           </Formik>
@@ -136,4 +146,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default RegistrationForm;
