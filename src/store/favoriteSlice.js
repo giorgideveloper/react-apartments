@@ -8,10 +8,24 @@ export const favoriteSlice = createSlice({
 	},
 	reducers: {
 		addFavorite: (state, action) => {
-			state.setFavorite = action.payload;
+			let existsItemIndex = state.setFavorite?.findIndex(
+				item => item.id === action.payload?.id
+			);
+			if (existsItemIndex !== -1) {
+				state.setFavorite.splice(existsItemIndex, 1);
+			} else {
+				let allFavorite = { ...action.payload };
+				state.setFavorite?.push(allFavorite);
+			}
 		},
-		addType: (state, action) => {
-			state.setFavoriteType = action.payload;
+		removeFromFavorite: (state, action) => {
+			const itemToRemove = action.payload;
+			const index = state.setFavorite.findIndex(
+				item => item.id === itemToRemove.id
+			);
+			if (index !== -1) {
+				state.setFavorite.splice(index, 1);
+			}
 		},
 	},
 });

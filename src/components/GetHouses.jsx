@@ -25,7 +25,6 @@ function GetHouses() {
 		return error;
 	}
 
-	console.log(houses);
 	return (
 		<>
 			<div className='container'>

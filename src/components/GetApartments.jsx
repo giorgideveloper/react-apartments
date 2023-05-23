@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { HiLocationMarker } from 'react-icons/hi';
@@ -8,9 +8,10 @@ import { MdFavoriteBorder } from 'react-icons/md';
 // import { setLoading } from '../store/loadingSlice';
 import { deleteApartments } from '../store/contentSlice';
 import { fetchContent } from '../store/contentSlice';
-import { addFavorite } from '../store/favoriteSlice';
+import { addFavorite, addType } from '../store/favoriteSlice';
 
 function GetApartments() {
+	const [color, setColor] = useState(true);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -29,9 +30,10 @@ function GetApartments() {
 		return error;
 	}
 
-	// const handleFavorite = () =>{
-	// 		;
-	// }
+	const handleFavorite = item => {
+		dispatch(addFavorite({ ...item, favorites: true }));
+		setColor(!color);
+	};
 
 	return (
 		<>
@@ -63,9 +65,9 @@ function GetApartments() {
 
 										<div className='card-delete-body '>
 											<MdFavoriteBorder
-												className='fs-5 mr-auto me-3'
+												className='fs-5 mr-auto me-3  '
 												role='button'
-												onClick={() => dispatch(addFavorite(apartment))}
+												onClick={() => handleFavorite(apartment)}
 											/>
 											<RiDeleteBin2Fill
 												className='fs-4 text-danger'
